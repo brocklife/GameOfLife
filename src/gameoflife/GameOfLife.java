@@ -43,7 +43,7 @@ public class GameOfLife {
         frame.setSize(m,n);
         frame.setVisible(true);
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 5; i++){
             board.printBoard();
             if (i == 0)
                 frame.paint(frame.getGraphics());
