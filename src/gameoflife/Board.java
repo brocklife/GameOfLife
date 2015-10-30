@@ -28,12 +28,12 @@ public class Board {
         boardA = new byte[m][n];
         boardB = new byte[m][n];
     }
-    
-    public int getHeight(){
+
+    public int getHeight() {
         return M;
     }
-    
-    public int getWidth(){
+
+    public int getWidth() {
         return N;
     }
 
@@ -43,6 +43,28 @@ public class Board {
 
     public void setElement(byte value, int i, int j) {
         boardA[i][j] = value;
+    }
+
+    public byte[][] getRowsForParallelExecution(int startRow, int nRows) {
+        byte[][] result = new byte[nRows + 2][M];
+        byte[][] board;
+        int iterations = nRows + 2;
+        int currentRow = modulo(startRow - 1, M);
+
+        if (A) {
+            board = boardA;
+        } else {
+            board = boardB;
+        }
+
+        for (int i = 0; i < iterations; i++) {
+            for (int j = 0; j < N; j++) {
+                result[i][j] = board[currentRow][j];
+            }
+            currentRow = modulo(currentRow + 1, M);
+        }
+
+        return result;
     }
 
     public void initializeBoard() {
@@ -75,42 +97,44 @@ public class Board {
         }
 
     }
-    
-    private int modulo(int i, int m){
+
+    private int modulo(int i, int m) {
         return (i % m + m) % m;
     }
 
     private int countAliveNeighbours(int i, int j) {
         int result = 0;
         byte[][] board;
-        
-        if (A) board = boardA;
-        else board = boardB;
-        System.out.println((i-1)%M);
-            if (board[modulo(i - 1,M)][modulo(j - 1,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i - 1,M)][modulo(j,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i - 1,M)][modulo(j + 1,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i,M)][modulo(j - 1,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i,M)][modulo(j + 1,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i + 1,M)][modulo(j - 1,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i + 1,M)][modulo(j,N)] == ALIVE) {
-                result++;
-            }
-            if (board[modulo(i + 1,M)][modulo(j + 1,N)] == ALIVE) {
-                result++;
-            }
+
+        if (A) {
+            board = boardA;
+        } else {
+            board = boardB;
+        }
+        if (board[modulo(i - 1, M)][modulo(j - 1, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i - 1, M)][modulo(j, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i - 1, M)][modulo(j + 1, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i, M)][modulo(j - 1, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i, M)][modulo(j + 1, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i + 1, M)][modulo(j - 1, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i + 1, M)][modulo(j, N)] == ALIVE) {
+            result++;
+        }
+        if (board[modulo(i + 1, M)][modulo(j + 1, N)] == ALIVE) {
+            result++;
+        }
         return result;
     }
 
@@ -154,7 +178,7 @@ public class Board {
     private void makeStepB() {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
-                int aliveNeighbours = countAliveNeighbours(i,j);
+                int aliveNeighbours = countAliveNeighbours(i, j);
                 if (boardB[i][j] == ALIVE) {
                     if (aliveNeighbours < 2 || aliveNeighbours > 3) {
                         boardA[i][j] = DEAD;

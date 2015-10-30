@@ -37,7 +37,7 @@ class GraphicBoard extends JPanel {
                 buffered.setRGB(i, j, col);
             }
         }
-        if(imageUpdate(buffered, ImageObserver.SOMEBITS, 0, 0, buffered.getWidth(), buffered.getHeight()))
+        if(imageUpdate(buffered, ImageObserver.FRAMEBITS, 0, 0, buffered.getWidth(), buffered.getHeight()))
             g.drawImage(buffered, 0, 0, Color.BLACK, null); 
     }
     
