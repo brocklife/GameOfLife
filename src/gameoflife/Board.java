@@ -25,8 +25,8 @@ public class Board {
         M = m;
         N = n;
         A = true;
-        boardA = new byte[m+2][n+2];
-        boardB = new byte[m+2][n+2];
+        boardA = new byte[m][n];
+        boardB = new byte[m][n];
     }
     
     public int getHeight(){
@@ -38,17 +38,17 @@ public class Board {
     }
 
     public byte getElement(int i, int j) {
-        return boardA[i+1][j+1];
+        return boardA[i][j];
     }
 
     public void setElement(byte value, int i, int j) {
-        boardA[i+1][j+1] = value;
+        boardA[i][j] = value;
     }
 
     public void initializeBoard() {
         Random r = new Random();
-        for (int i = 1; i < M+1; i++) {
-            for (int j = 1; j < N+1; j++) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 byte number = (byte) (Math.abs(r.nextInt()) % 2);
                 boardA[i][j] = number;
             }
@@ -57,16 +57,16 @@ public class Board {
 
     public void printBoard() {
         if (A) {
-            for (int i = 1; i < M+1; i++) {
-                for (int j = 1; j < N+1; j++) {
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
                     System.out.print(boardA[i][j] + "\t");
                 }
                 System.out.print("\n");
             }
             System.out.print("\n");
         } else {
-            for (int i = 1; i < M+1; i++) {
-                for (int j = 1; j < N+1; j++) {
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
                     System.out.print(boardB[i][j] + "\t");
                 }
                 System.out.print("\n");
@@ -75,6 +75,10 @@ public class Board {
         }
 
     }
+    
+    private int modulo(int i, int m){
+        return (i % m + m) % m;
+    }
 
     private int countAliveNeighbours(int i, int j) {
         int result = 0;
@@ -82,29 +86,29 @@ public class Board {
         
         if (A) board = boardA;
         else board = boardB;
-        
-            if (board[(i - 1)%M][(j - 1)%N] == ALIVE) {
+        System.out.println((i-1)%M);
+            if (board[modulo(i - 1,M)][modulo(j - 1,N)] == ALIVE) {
                 result++;
             }
-            if (board[(i - 1)%M][j%N] == ALIVE) {
+            if (board[modulo(i - 1,M)][modulo(j,N)] == ALIVE) {
                 result++;
             }
-            if (board[(i - 1)%M][(j + 1)%N] == ALIVE) {
+            if (board[modulo(i - 1,M)][modulo(j + 1,N)] == ALIVE) {
                 result++;
             }
-            if (board[i%M][(j - 1)%N] == ALIVE) {
+            if (board[modulo(i,M)][modulo(j - 1,N)] == ALIVE) {
                 result++;
             }
-            if (board[i%M][(j + 1)%N] == ALIVE) {
+            if (board[modulo(i,M)][modulo(j + 1,N)] == ALIVE) {
                 result++;
             }
-            if (board[(i + 1)%M][(j - 1)%N] == ALIVE) {
+            if (board[modulo(i + 1,M)][modulo(j - 1,N)] == ALIVE) {
                 result++;
             }
-            if (board[(i + 1)%M][j%N] == ALIVE) {
+            if (board[modulo(i + 1,M)][modulo(j,N)] == ALIVE) {
                 result++;
             }
-            if (board[(i + 1)%M][(j + 1)%N] == ALIVE) {
+            if (board[modulo(i + 1,M)][modulo(j + 1,N)] == ALIVE) {
                 result++;
             }
         return result;
@@ -125,8 +129,8 @@ public class Board {
     }
 
     private void makeStepA() {
-        for (int i = 1; i < M+1; i++) {
-            for (int j = 1; j < N+1; j++) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 int aliveNeighbours = countAliveNeighbours(i, j);
                 if (boardA[i][j] == ALIVE) {
                     if (aliveNeighbours < 2 || aliveNeighbours > 3) {
@@ -148,8 +152,8 @@ public class Board {
     }
 
     private void makeStepB() {
-        for (int i = 1; i < M+1; i++) {
-            for (int j = 1; j < N+1; j++) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 int aliveNeighbours = countAliveNeighbours(i,j);
                 if (boardB[i][j] == ALIVE) {
                     if (aliveNeighbours < 2 || aliveNeighbours > 3) {

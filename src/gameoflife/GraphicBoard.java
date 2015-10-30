@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import javax.swing.JPanel;
-import javax.swing.Painter;
-
 /**
  *
  * @author stefa
@@ -42,7 +40,6 @@ class GraphicBoard extends JPanel {
         if(imageUpdate(buffered, ImageObserver.SOMEBITS, 0, 0, buffered.getWidth(), buffered.getHeight()))
             g.drawImage(buffered, 0, 0, Color.BLACK, null); 
     }
-    
     
     @Override
     public void paintComponent(Graphics g){   
