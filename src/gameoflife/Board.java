@@ -141,59 +141,38 @@ public class Board {
     public void makeSteps(int n) {
         for (int i = 0; i < n; i++) {
             makeStep();
+            A = !A;
         }
     }
 
     private void makeStep() {
+        byte[][] boardStart, boardEnd;
         if (A) {
-            makeStepA();
+            boardStart = boardA;
+            boardEnd = boardB;
         } else {
-            makeStepB();
+            boardStart = boardB;
+            boardEnd = boardA;           
         }
-    }
-
-    private void makeStepA() {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 int aliveNeighbours = countAliveNeighbours(i, j);
-                if (boardA[i][j] == ALIVE) {
+                if (boardStart[i][j] == ALIVE) {
                     if (aliveNeighbours < 2 || aliveNeighbours > 3) {
-                        boardB[i][j] = DEAD;
+                        boardEnd[i][j] = DEAD;
                     } else {
-                        boardB[i][j] = ALIVE;
+                        boardEnd[i][j] = ALIVE;
                     }
                 } else {
                     if (aliveNeighbours == 3) {
-                        boardB[i][j] = ALIVE;
+                        boardEnd[i][j] = ALIVE;
                     } else {
-                        boardB[i][j] = DEAD;
+                        boardEnd[i][j] = DEAD;
                     }
                 }
             }
         }
-
-        A = !A;
+        
     }
 
-    private void makeStepB() {
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                int aliveNeighbours = countAliveNeighbours(i, j);
-                if (boardB[i][j] == ALIVE) {
-                    if (aliveNeighbours < 2 || aliveNeighbours > 3) {
-                        boardA[i][j] = DEAD;
-                    } else {
-                        boardA[i][j] = ALIVE;
-                    }
-                } else {
-                    if (aliveNeighbours == 3) {
-                        boardA[i][j] = ALIVE;
-                    } else {
-                        boardA[i][j] = DEAD;
-                    }
-                }
-            }
-        }
-        A = !A;
-    }
 }

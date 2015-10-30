@@ -20,8 +20,8 @@ public class GameOfLife {
      */
     public static void main(String[] args) {
         
-        int m = 10;
-        int n = 4;
+        int m = 300;
+        int n = 300;
        
         Board board = new Board (m,n);
         board.initializeBoard();
@@ -35,21 +35,21 @@ public class GameOfLife {
             }
             System.out.print("\n");
         }
-//        JFrame frame = new JFrame("Game of Life");
-//        Graphics g = frame.getGraphics();
-//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-//        frame.paint(g);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(m,n);
-//        frame.setVisible(true);
-//
-//        for(int i = 0; i < 10; i++){
-//            board.printBoard();
-//            if (i == 0)
-//                frame.paint(frame.getGraphics());
-//            frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
-//            board.makeSteps(1);
-//            board.printBoard();
-//        }
+        JFrame frame = new JFrame("Game of Life");
+        Graphics g = frame.getGraphics();
+        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+        frame.paint(g);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(m,n);
+        frame.setVisible(true);
+
+        for(int i = 0; i < 10; i++){
+            board.printBoard();
+            if (i == 0)
+                frame.paint(frame.getGraphics());
+            frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
+            board.makeSteps(1);
+            board.printBoard();
+        }
     }
 }
