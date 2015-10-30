@@ -36,6 +36,8 @@ public class GameOfLife {
 
         for(int i = 0; i < 10; i++){
             board.printBoard();
+            if (i == 0)
+                frame.paint(frame.getGraphics());
             frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
             board.makeSteps(1);
             board.printBoard();
