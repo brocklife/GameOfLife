@@ -140,12 +140,12 @@ public class Board {
 
     public void makeSteps(int n) {
         for (int i = 0; i < n; i++) {
-            makeStep();
+            makeStep(0, N);
             A = !A;
         }
     }
 
-    private void makeStep() {
+    private void makeStep(int startRow, int nRows) {
         byte[][] boardStart, boardEnd;
         if (A) {
             boardStart = boardA;
@@ -154,7 +154,7 @@ public class Board {
             boardStart = boardB;
             boardEnd = boardA;           
         }
-        for (int i = 0; i < M; i++) {
+        for (int i = startRow; i < nRows; i++) {
             for (int j = 0; j < N; j++) {
                 int aliveNeighbours = countAliveNeighbours(i, j);
                 if (boardStart[i][j] == ALIVE) {
