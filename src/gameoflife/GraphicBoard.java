@@ -1,0 +1,55 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gameoflife;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import javax.swing.JPanel;
+import javax.swing.Painter;
+
+/**
+ *
+ * @author stefa
+ */
+class GraphicBoard extends JPanel {
+
+    int width, height, rows, columns;
+    private final Board board;
+    private BufferedImage buffered;
+    
+    GraphicBoard(Board b) {
+        this.setDoubleBuffered(true);
+        board = b;
+    }
+    
+    private void updateScreen(Graphics g){
+        buffered = new BufferedImage(board.getHeight(), board.getWidth(), BufferedImage.TYPE_INT_RGB);
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                byte colour = board.getElement(i, j);
+                int col;
+                if (colour == 0)
+                    col = 0;
+                else
+                    col = 65280;
+                buffered.setRGB(i, j, col);
+            }
+        }
+        g.drawImage(buffered, 0, 0, Color.BLACK, null); 
+    }
+    
+    @Override
+    public void paintComponent(Graphics g){   
+        super.paintComponent(g);  
+        updateScreen(g); 
+    }
+    
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
+}
+
