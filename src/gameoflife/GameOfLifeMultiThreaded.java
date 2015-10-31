@@ -44,11 +44,16 @@ public class GameOfLifeMultiThreaded {
 
         for (int i = 0; i < steps; i++) {
             for (int j = 0; j < NTHREAD; j++){
-                ex.execute(new GoLThread(board, j*step, step));
+                if (j==0)
+                    ex.execute(new GoLThread(board, j*step, step));
+                else if (j<NTHREAD-1)
+                    ex.execute(new GoLThread(board, j*step+1, step));
+                else
+                    ex.execute(new GoLThread(board, j*step+1, m-step));
             }
-            ex.awaitTermination(10, TimeUnit.SECONDS);
-            frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
+            ex.awaitTermination(1, TimeUnit.NANOSECONDS);
             board.swapBoards();
+            frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
         }
 
     }

@@ -122,8 +122,15 @@ public class Board {
         return result;
     }
     
-    public synchronized void swapBoards(){
+    public void swapBoards(){
         A = !A;
+    }
+
+    public void makeSteps(int n, int startRow, int nRows) {
+        for (int i = 0; i < n; i++) {
+            makeStep(startRow, nRows); //nRows to be added as parameter!!!
+            swapBoards();
+        }
     }
 
     public void makeStep(int startRow, int nRows) {

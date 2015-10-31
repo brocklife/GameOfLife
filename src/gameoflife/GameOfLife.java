@@ -18,10 +18,10 @@ public class GameOfLife {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
-        int m = 480;
-        int n = 640;
+        int m = 300;
+        int n = 300;
        
         Board board = new Board (m,n);
         board.initializeBoard();
@@ -35,13 +35,9 @@ public class GameOfLife {
         frame.setSize(n,m);
         frame.setVisible(true);
 
-        for(int i = 0; i < 10000; i++){
-            //board.printBoard();
-            if (i == 0)
-                frame.paint(frame.getGraphics());
+        while(true){
             frame.repaint(0, 0, frame.getWidth(), frame.getHeight());
-            board.makeStep(0, m);
-            board.swapBoards();
+            board.makeSteps(1, 0, n);
         }
     }
 }
