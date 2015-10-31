@@ -38,33 +38,17 @@ public class Board {
     }
 
     public byte getElement(int i, int j) {
-        return boardA[i][j];
+        if (A)
+            return boardA[i][j];
+        else 
+            return boardB[i][j];
     }
 
     public void setElement(byte value, int i, int j) {
-        boardA[i][j] = value;
-    }
-
-    public byte[][] getRowsForParallelExecution(int startRow, int nRows) {
-        byte[][] result = new byte[nRows + 2][M];
-        byte[][] board;
-        int iterations = nRows + 2;
-        int currentRow = modulo(startRow - 1, M);
-
-        if (A) {
-            board = boardA;
-        } else {
-            board = boardB;
-        }
-
-        for (int i = 0; i < iterations; i++) {
-            for (int j = 0; j < N; j++) {
-                result[i][j] = board[currentRow][j];
-            }
-            currentRow = modulo(currentRow + 1, M);
-        }
-
-        return result;
+        if(A)
+            boardA[i][j] = value;
+        else 
+            boardB[i][j] = value;
     }
 
     public void initializeBoard() {
@@ -137,15 +121,12 @@ public class Board {
         }
         return result;
     }
-
-    public void makeSteps(int n) {
-        for (int i = 0; i < n; i++) {
-            makeStep(0, N);
-            A = !A;
-        }
+    
+    public synchronized void swapBoards(){
+        A = !A;
     }
 
-    private void makeStep(int startRow, int nRows) {
+    public void makeStep(int startRow, int nRows) {
         byte[][] boardStart, boardEnd;
         if (A) {
             boardStart = boardA;

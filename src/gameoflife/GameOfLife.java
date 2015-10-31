@@ -20,36 +20,28 @@ public class GameOfLife {
      */
     public static void main(String[] args) {
         
-        int m = 300;
-        int n = 300;
+        int m = 480;
+        int n = 640;
        
         Board board = new Board (m,n);
         board.initializeBoard();
         board.printBoard();
         
-        byte[][] tmp = board.getRowsForParallelExecution(0, 3);
-        
-        for (byte[] tmp1 : tmp) {
-            for (int j = 0; j<4; j++) {
-                System.out.print(tmp1[j] + "\t");
-            }
-            System.out.print("\n");
-        }
         JFrame frame = new JFrame("Game of Life");
         Graphics g = frame.getGraphics();
         frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
         frame.paint(g);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(m,n);
+        frame.setSize(n,m);
         frame.setVisible(true);
 
-        for(int i = 0; i < 5; i++){
-            board.printBoard();
+        for(int i = 0; i < 10000; i++){
+            //board.printBoard();
             if (i == 0)
                 frame.paint(frame.getGraphics());
-            frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
-            board.makeSteps(1);
-            board.printBoard();
+            frame.repaint(0, 0, frame.getWidth(), frame.getHeight());
+            board.makeStep(0, m);
+            board.swapBoards();
         }
     }
 }

@@ -25,7 +25,7 @@ class GraphicBoard extends JPanel {
     }
     
     private void updateScreen(Graphics g){
-        buffered = new BufferedImage(board.getHeight(), board.getWidth(), BufferedImage.TYPE_INT_RGB);
+        buffered = new BufferedImage(board.getWidth(), board.getHeight(), BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
                 byte colour = board.getElement(i, j);
@@ -34,10 +34,10 @@ class GraphicBoard extends JPanel {
                     col = 0;
                 else
                     col = 65280;
-                buffered.setRGB(i, j, col);
+                buffered.setRGB(j,i, col);
             }
         }
-        if(imageUpdate(buffered, ImageObserver.FRAMEBITS, 0, 0, buffered.getWidth(), buffered.getHeight()))
+        if(imageUpdate(buffered, ImageObserver.FRAMEBITS,0, 0, buffered.getWidth(), buffered.getHeight()))
             g.drawImage(buffered, 0, 0, Color.BLACK, null); 
     }
     
