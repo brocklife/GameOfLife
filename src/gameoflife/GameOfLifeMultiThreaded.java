@@ -7,9 +7,12 @@ package gameoflife;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 /**
@@ -21,40 +24,51 @@ public class GameOfLifeMultiThreaded {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InterruptedException {
-        int NTHREAD = 4;
-        int m = 400;
-        int n = 400;
-        int steps = 10000;
-        int step = m/(NTHREAD-1);
-        
-        ExecutorService ex = Executors.newFixedThreadPool(NTHREAD);
+    public static void main(String[] args) throws InterruptedException{
+        int NTHREADS = Runtime.getRuntime().availableProcessors();
+        int m = 768;
+        int n = 1024;
+        int steps = 500;
+        int step = m / (NTHREADS);
 
         Board board = new Board(m, n);
         board.initializeBoard();
-        board.printBoard();
-
-        JFrame frame = new JFrame("Game of Life");
-        Graphics g = frame.getGraphics();
-        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-        frame.paint(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(m, n);
-        frame.setVisible(true);
-
-//        for (int i = 0; i < steps; i++) {
-//            for (int j = 0; j < NTHREAD; j++){
-//                if (j==0)
-//                    ex.execute(new GoLThread(board, j*step, step));
-//                else if (j<NTHREAD-1)
-//                    ex.execute(new GoLThread(board, j*step+1, step));
-//                else
-//                    ex.execute(new GoLThread(board, j*step+1, m-step));
-//            }
-//            ex.awaitTermination(1, TimeUnit.NANOSECONDS);
-//            board.swapBoards();
-//            frame.repaint(2000, 0, 0, frame.getWidth(), frame.getHeight());
-//        }
+        
+//        JFrame frame = new JFrame("Game of Life");
+//        Graphics g = frame.getGraphics();
+//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(n, m);
+//        frame.setVisible(true);
+        ArrayList<Thread> list = new ArrayList<>();
+        
+        final long startTime = System.currentTimeMillis();
+        for (int i = 0; i < steps; i++) {
+            //ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
+            for (int j = 0; j < NTHREADS; j++) {
+                if (j < NTHREADS - 1) {
+                    list.add(new GoLThread(board, j * step, step));
+                    //threadPool.execute(new GoLThread(board, j * step, step));
+                } else {
+                    list.add(new GoLThread(board, j * step, m - (step * j)));
+                    //threadPool.execute(new GoLThread(board, j * step, m - (step * j)));
+                }
+            }
+            
+            for (Thread t : list){
+                t.start();
+            }
+            for (Thread t : list){
+                t.join();
+            }
+            //threadPool.shutdown();
+            //while(!threadPool.isTerminated()){}
+            list.clear();
+            board.swapBoards();
+        }
+        
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Executed in " + (endTime-startTime) + " ms!");
 
     }
 }

@@ -20,24 +20,25 @@ public class GameOfLife {
      */
     public static void main(String[] args){
         
-        int m = 300;
-        int n = 300;
-       
+        int m = 768;
+        int n = 1024;
+        int steps = 500;
         Board board = new Board (m,n);
         board.initializeBoard();
-        board.printBoard();
         
-        JFrame frame = new JFrame("Game of Life");
-        Graphics g = frame.getGraphics();
-        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-        frame.paint(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(n,m);
-        frame.setVisible(true);
-
-        while(true){
-            frame.repaint(0, 0, frame.getWidth(), frame.getHeight());
-            board.makeSteps(1, 0, n);
+//        JFrame frame = new JFrame("Game of Life");
+//        Graphics g = frame.getGraphics();
+//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(n,m);
+//        frame.setVisible(true);
+        
+        final long startTime = System.currentTimeMillis();
+        for(int k = 0; k < steps; k++){
+            board.makeSteps(1, 0, m);
         }
+        final long endTime = System.currentTimeMillis();
+        
+        System.out.println("Executed in " + (endTime-startTime) + " ms!");
     }
 }

@@ -9,17 +9,20 @@ package gameoflife;
  *
  * @author stefa
  */
-public class GoLThread implements Runnable{
+public class GoLThread extends Thread {
+
     Board board;
     int start, n;
-    public GoLThread(Board b, int startRow, int nRows){
-      board = b; 
-      start = startRow;
-      n = nRows;
+
+    public GoLThread(Board b, int startRow, int nRows) {
+        board = b;
+        start = startRow;
+        n = nRows;
     }
+
     @Override
     public void run() {
         board.makeStep(start, n);
     }
-    
+
 }
