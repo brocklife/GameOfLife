@@ -5,6 +5,9 @@
  */
 package gameoflife;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author stefa
@@ -12,17 +15,20 @@ package gameoflife;
 public class GoLThread extends Thread {
 
     Board board;
-    int start, n;
+    int start, n, steps;
 
-    public GoLThread(Board b, int startRow, int nRows) {
+    public GoLThread(Board b, int startRow, int nRows, int iterations) {
         board = b;
         start = startRow;
         n = nRows;
+        steps = iterations;
+
     }
 
     @Override
     public void run() {
-        board.makeStep(start, n);
+        for(int i = 0; i < steps; i++)
+            board.makeStep(start, n);
     }
-
 }
+

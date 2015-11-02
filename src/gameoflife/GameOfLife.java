@@ -20,18 +20,18 @@ public class GameOfLife {
      */
     public static void main(String[] args){
         
-        int m = 768;
-        int n = 1024;
-        int steps = 500;
+        int m = 500;
+        int n = 500;
+        int steps = 100;
         Board board = new Board (m,n);
         board.initializeBoard();
         
-//        JFrame frame = new JFrame("Game of Life");
-//        Graphics g = frame.getGraphics();
-//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(n,m);
-//        frame.setVisible(true);
+        JFrame frame = new JFrame("Game of Life");
+        Graphics g = frame.getGraphics();
+        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(n,m);
+        frame.setVisible(true);
         
         final long startTime = System.currentTimeMillis();
         for(int k = 0; k < steps; k++){

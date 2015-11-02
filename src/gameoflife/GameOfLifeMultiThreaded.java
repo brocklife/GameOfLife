@@ -20,52 +20,47 @@ import javax.swing.JFrame;
  * @author stefa
  */
 public class GameOfLifeMultiThreaded {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException{
         int NTHREADS = Runtime.getRuntime().availableProcessors();
-        int m = 768;
-        int n = 1024;
-        int steps = 500;
+        int counter = 0;
+        int m = 500;
+        int n = 500;
+        int steps = 100;
         int step = m / (NTHREADS);
 
         Board board = new Board(m, n);
         board.initializeBoard();
         
-//        JFrame frame = new JFrame("Game of Life");
-//        Graphics g = frame.getGraphics();
-//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(n, m);
-//        frame.setVisible(true);
+        JFrame frame = new JFrame("Game of Life");
+        Graphics g = frame.getGraphics();
+        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+        frame.paint(g);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(n, m);
+        frame.setVisible(true);
         ArrayList<Thread> list = new ArrayList<>();
         
         final long startTime = System.currentTimeMillis();
         for (int i = 0; i < steps; i++) {
-            //ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
+            ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
             for (int j = 0; j < NTHREADS; j++) {
                 if (j < NTHREADS - 1) {
-                    list.add(new GoLThread(board, j * step, step));
-                    //threadPool.execute(new GoLThread(board, j * step, step));
+                    //list.add(new GoLThread(board, j * step, step, steps));
+                    threadPool.execute(new GoLThread(board, j * step, step, steps));
                 } else {
-                    list.add(new GoLThread(board, j * step, m - (step * j)));
-                    //threadPool.execute(new GoLThread(board, j * step, m - (step * j)));
+                    //list.add(new GoLThread(board, j * step, m - (step * j), steps));
+                    threadPool.execute(new GoLThread(board, j * step, m - (step * j), steps));
                 }
             }
             
-            for (Thread t : list){
-                t.start();
-            }
-            for (Thread t : list){
-                t.join();
-            }
-            //threadPool.shutdown();
-            //while(!threadPool.isTerminated()){}
-            list.clear();
+            threadPool.shutdown();
+            while(!threadPool.isTerminated()){}
             board.swapBoards();
-        }
+            frame.update(g);
+    }
         
         final long endTime = System.currentTimeMillis();
         System.out.println("Executed in " + (endTime-startTime) + " ms!");
