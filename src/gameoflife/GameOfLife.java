@@ -20,11 +20,11 @@ public class GameOfLife {
      */
     public static void main(String[] args){
         
-        int m = 1000;
-        int n = 1000;
+        int m = 400;
+        int n = 400;
         int steps = 1000;
         Board board = new Board (m,n);
-        board.initializeBoard();
+        board.initializeGlider();
         
         JFrame frame = new JFrame("Game of Life");
         Graphics g = frame.getGraphics();

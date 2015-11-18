@@ -57,6 +57,19 @@ public class Board {
         }
     }
     
+    public void initializeGlider() {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                boardFrom[i][j] = 0;
+            }
+        }
+        boardFrom[0][1]=1;
+        boardFrom[1][2]=1;
+        boardFrom[2][0]=1;
+        boardFrom[2][1]=1;
+        boardFrom[2][2]=1;
+    }
+    
     public void printBoard(int fromRow, int nRows){
         for (int i = fromRow; i < fromRow+nRows; i++) {
             for (int j = 0; j < N; j++) {
