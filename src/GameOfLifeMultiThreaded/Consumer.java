@@ -46,5 +46,6 @@ public class Consumer implements Runnable {
         }
         final long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime);
+        return;
     }
 }

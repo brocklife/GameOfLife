@@ -1,13 +1,11 @@
 package GameOfLifeMultiThreaded;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JFrame;
+
 
 
 /**
@@ -25,7 +23,7 @@ public class GameOfLifeMultiThreaded {
         int NTHREADS = Runtime.getRuntime().availableProcessors();
         int m = 1000;
         int n = 1000;
-        int steps = 1000;
+        int steps = 100;
         int step = m / (NTHREADS);
         
 
@@ -38,13 +36,13 @@ public class GameOfLifeMultiThreaded {
                                    }
                                  });
         
-        JFrame frame = new JFrame("Game of Life");
-        Graphics g = frame.getGraphics();
-        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-        frame.paint(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(n, m);
-        frame.setVisible(true);
+//        JFrame frame = new JFrame("Game of Life");
+//        Graphics g = frame.getGraphics();
+//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+//        frame.paint(g);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(n, m);
+//        frame.setVisible(true);
 
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
         
@@ -55,5 +53,8 @@ public class GameOfLifeMultiThreaded {
                     threadPool.execute(new Consumer(board, j * step, m - (step * j), steps, barrier, NTHREADS));
                 }
             }
+        
+        threadPool.shutdown();
+        
     }
 }

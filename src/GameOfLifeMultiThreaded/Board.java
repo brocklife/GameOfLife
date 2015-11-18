@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package GameOfLifeMultiThreaded;
-
-import gameoflife.*;
 import java.util.Random;
 
 /**
