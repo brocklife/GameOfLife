@@ -7,7 +7,9 @@ over a 1000x1000 board:
 
 ![alt tag](https://github.com/teto1992/GameOfLife/blob/master/plot.PNG)
 
-1 core :                70 s\\
-2 cores (4 contexts):   37 s\\
-8 cores (16 contexts):  9 s\\
+1 core :                70 s
+
+2 cores (4 contexts):   37 s
+
+8 cores (16 contexts):  9 s
 
