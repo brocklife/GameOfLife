@@ -11,14 +11,12 @@ import gameoflife.Board;
  *
  * @author stefano
  */
-class IntervalBoard {
+class Interval {
     int start;
     int step;
-    Board board;
     
-    public IntervalBoard(int start, int step, Board board){
+    public Interval(int start, int step){
         this.start = start;
-        this.board = board;
         this.step = step;
     }
 }

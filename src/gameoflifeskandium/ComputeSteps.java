@@ -8,14 +8,18 @@ package gameoflifeskandium;
 import cl.niclabs.skandium.muscles.Execute;
 import gameoflife.Board;
 
-
 /**
  *
  * @author stefano
  */
-class ComputeSteps implements Execute<IntervalBoard, Board> {
-    public Board execute(IntervalBoard param) throws Exception {
-        param.board.makeStep(param.start, param.step);
-        return param.board;
+class ComputeSteps implements Execute<Interval, Board> {
+    Board board;
+    public ComputeSteps(Board board){
+        this.board = board;
+    }
+    @Override
+    public Board execute(Interval param) throws Exception {
+        board.makeStep(param.start, param.step);
+        return board;
     }
 }

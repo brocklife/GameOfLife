@@ -12,7 +12,7 @@ import gameoflife.Board;
  *
  * @author stefano
  */
-class SplitBoard implements Split<Board, IntervalBoard> {
+class SplitBoard implements Split<Board, Interval> {
     int numParts;
 
     public SplitBoard(int availableProcessors) {
@@ -20,16 +20,16 @@ class SplitBoard implements Split<Board, IntervalBoard> {
     }
 
     @Override
-    public IntervalBoard[] split(Board param) throws Exception{ 
-        IntervalBoard[] result = new IntervalBoard[numParts];
+    public Interval[] split(Board param) throws Exception{ 
+        Interval[] result = new Interval[numParts];
         int m = param.getHeight();
         int step = m/numParts;
         
         for (int j = 0; j < numParts; j++) {
             if (j < numParts - 1) {
-                result[j] = new IntervalBoard(j*step, step, param); 
+                result[j] = new Interval(j*step, step); 
             } else 
-                result[j] = new IntervalBoard(j*step, m-(j*step), param); 
+                result[j] = new Interval(j*step, m-(j*step)); 
             }
         return result;
     }

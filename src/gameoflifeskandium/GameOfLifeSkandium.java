@@ -33,15 +33,15 @@ public class GameOfLifeSkandium {
         int n = 1000;
         int times = 1000;
         int THREADS = Runtime.getRuntime().availableProcessors();
+        Board b = new Board(m, n);
         Skandium skandium = new Skandium(THREADS);
         Skeleton<Board, Board> gof = new Map<>(
                                             new SplitBoard(THREADS),
-                                            new ComputeSteps(),
-                                            new MergeResults());
+                                            new ComputeSteps(b),
+                                            new MergeResults(b));
         
         Skeleton<Board, Board> forLoop = new For(gof, times);
         
-        Board b = new Board(m, n);
         b.initializeBoard();
         
         Stream<Board,Board> stream = skandium.newStream(forLoop);
