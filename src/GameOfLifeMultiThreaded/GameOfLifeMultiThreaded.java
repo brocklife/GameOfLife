@@ -6,7 +6,6 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 /**
@@ -22,20 +21,39 @@ public class GameOfLifeMultiThreaded {
      */
     public static void main(String[] args) throws InterruptedException, BrokenBarrierException {
         int NTHREADS = Runtime.getRuntime().availableProcessors();
-        int m = 1000;
-        int n = 1000;
-        int steps = 1000;
+        int m = 0;
+        int n = 0;
+        int steps = 0;
+        
+        if (args.length == 3) {
+            try {
+                m = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[0] + " must be an integer.");
+                System.exit(1);
+            }
+            try {
+                n = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[1] + " must be an integer.");
+                System.exit(1);
+            }
+            try {
+                steps = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[2] + " must be an integer.");
+                System.exit(1);
+            }
+        } else {
+            System.err.println("You need to specify three arguments: height, width of the board and number of steps to be performed.");
+            System.exit(1);
+        }
+        
         int step = m / (NTHREADS);
 
         final Board board = new Board(m, n);
         board.initializeBoard();
         //board.initializeGlider();
-
-        final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, new Runnable() {
-            public void run() {
-                board.swapBoards();
-            }
-        });
 
         JFrame frame = new JFrame("Game of Life");
         Graphics g = frame.getGraphics();
@@ -44,6 +62,12 @@ public class GameOfLifeMultiThreaded {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(n, m);
         frame.setVisible(true);
+
+        final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, new Runnable() {
+            public void run() {
+                board.swapBoards();
+            }
+        });
 
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
 
