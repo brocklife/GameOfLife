@@ -15,13 +15,13 @@ import javax.swing.JPanel;
  *
  * @author stefa
  */
-class GraphicBoard extends JPanel {
+public class GraphicBoard extends JPanel {
 
     private final Board board;
     private BufferedImage buffered;
 
     
-    GraphicBoard(Board b) {
+    public GraphicBoard(Board b) {
         this.setDoubleBuffered(true);
         board = b;
     }

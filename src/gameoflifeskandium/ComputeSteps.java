@@ -6,6 +6,7 @@
 package gameoflifeskandium;
 
 import cl.niclabs.skandium.muscles.Execute;
+import gameoflife.Board;
 
 
 /**

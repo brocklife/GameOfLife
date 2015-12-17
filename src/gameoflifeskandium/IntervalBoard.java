@@ -5,6 +5,8 @@
  */
 package gameoflifeskandium;
 
+import gameoflife.Board;
+
 /**
  *
  * @author stefano

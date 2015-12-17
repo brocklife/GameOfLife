@@ -10,6 +10,8 @@ import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.For;
 import cl.niclabs.skandium.skeletons.Map;
 import cl.niclabs.skandium.skeletons.Skeleton;
+import gameoflife.Board;
+import gameoflife.GraphicBoard;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.util.concurrent.ExecutionException;
@@ -27,8 +29,8 @@ public class GameOfLifeSkandium {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int m = 1000;
-        int n = 1000;
+        int m = 500;
+        int n = 500;
         int times = 1000;
         int THREADS = Runtime.getRuntime().availableProcessors();
         Skandium skandium = new Skandium(THREADS);
