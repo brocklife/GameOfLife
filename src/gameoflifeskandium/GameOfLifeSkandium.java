@@ -48,22 +48,17 @@ public class GameOfLifeSkandium {
         long init = System.currentTimeMillis();
         Future<Board> future = stream.input(b);
         
-//        JFrame frame = new JFrame("Game of Life");
-//        Graphics g = frame.getGraphics();
-//        frame.getContentPane().add(new GraphicBoard(b), BorderLayout.CENTER);
-//        frame.paint(g);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(n, m);
-//        frame.setVisible(true);
+        JFrame frame = new JFrame("Game of Life - Skandium");
+        Graphics g = frame.getGraphics();
+        frame.getContentPane().add(new GraphicBoard(b), BorderLayout.CENTER);
+        frame.paint(g);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(n, m);
+        frame.setVisible(true);
 
-        while(!future.isDone()){
-        
-        }
+        Board res = future.get();
         long ended = System.currentTimeMillis();
 
         System.out.println(ended-init);
     }
-
-
-    
 }

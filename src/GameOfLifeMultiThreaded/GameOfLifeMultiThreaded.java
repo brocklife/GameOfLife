@@ -1,4 +1,4 @@
-package GameOfLifeMultiThreaded;
+package gameoflifemultithreaded;
 
 import gameoflife.GraphicBoard;
 import gameoflife.Board;
@@ -57,7 +57,7 @@ public class GameOfLifeMultiThreaded {
         board.initializeBoard();
         //board.initializeGlider();
 
-        JFrame frame = new JFrame("Game of Life");
+        JFrame frame = new JFrame("Game of Life - MT");
         Graphics g = frame.getGraphics();
         frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
         frame.paint(g);

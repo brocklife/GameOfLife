@@ -24,14 +24,14 @@ public class GameOfLife {
         int n = 1000;
         int steps = 1000;
         Board board = new Board (m,n);
-        board.initializeGlider();
+        board.initializeBoard();
         
-//        JFrame frame = new JFrame("Game of Life");
-//        Graphics g = frame.getGraphics();
-//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(n,m);
-//        frame.setVisible(true);
+        JFrame frame = new JFrame("Game of Life - ST");
+        Graphics g = frame.getGraphics();
+        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(n,m);
+        frame.setVisible(true);
         
         final long startTime = System.currentTimeMillis();
         for(int k = 0; k < steps; k++){
