@@ -29,8 +29,8 @@ public class GameOfLifeSkandium {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int m = 500;
-        int n = 500;
+        int m = 1000;
+        int n = 1000;
         int times = 1000;
         int THREADS = Runtime.getRuntime().availableProcessors();
         Skandium skandium = new Skandium(THREADS);
@@ -48,21 +48,20 @@ public class GameOfLifeSkandium {
         long init = System.currentTimeMillis();
         Future<Board> future = stream.input(b);
         
-        JFrame frame = new JFrame("Game of Life");
-        Graphics g = frame.getGraphics();
-        frame.getContentPane().add(new GraphicBoard(b), BorderLayout.CENTER);
-        frame.paint(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(n, m);
-        frame.setVisible(true);
-  
-        Board result;
-        result = future.get();
-        long ended = System.currentTimeMillis();
-        
-        
-        System.out.println(ended-init);
+//        JFrame frame = new JFrame("Game of Life");
+//        Graphics g = frame.getGraphics();
+//        frame.getContentPane().add(new GraphicBoard(b), BorderLayout.CENTER);
+//        frame.paint(g);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(n, m);
+//        frame.setVisible(true);
 
+        while(!future.isDone()){
+        
+        }
+        long ended = System.currentTimeMillis();
+
+        System.out.println(ended-init);
     }
 
 

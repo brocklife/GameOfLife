@@ -14,14 +14,8 @@ import gameoflife.Board;
  * @author stefano
  */
 class ComputeSteps implements Execute<IntervalBoard, Board> {
-
-    public ComputeSteps() {
-    }
-
     public Board execute(IntervalBoard param) throws Exception {
         param.board.makeStep(param.start, param.step);
         return param.board;
     }
-
-
 }

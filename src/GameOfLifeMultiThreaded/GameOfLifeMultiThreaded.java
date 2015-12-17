@@ -27,29 +27,29 @@ public class GameOfLifeMultiThreaded {
         int n = 500;
         int steps = 1000;
         
-//        if (args.length == 3) {
-//            try {
-//                m = Integer.parseInt(args[0]);
-//            } catch (NumberFormatException e) {
-//                System.err.println("Argument" + args[0] + " must be an integer.");
-//                System.exit(1);
-//            }
-//            try {
-//                n = Integer.parseInt(args[1]);
-//            } catch (NumberFormatException e) {
-//                System.err.println("Argument" + args[1] + " must be an integer.");
-//                System.exit(1);
-//            }
-//            try {
-//                steps = Integer.parseInt(args[2]);
-//            } catch (NumberFormatException e) {
-//                System.err.println("Argument" + args[2] + " must be an integer.");
-//                System.exit(1);
-//            }
-//        } else {
-//            System.err.println("You need to specify three arguments: height, width of the board and number of steps to be performed.");
-//            System.exit(1);
-//        }
+        if (args.length == 3) {
+            try {
+                m = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[0] + " must be an integer.");
+                System.exit(1);
+            }
+            try {
+                n = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[1] + " must be an integer.");
+                System.exit(1);
+            }
+            try {
+                steps = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[2] + " must be an integer.");
+                System.exit(1);
+            }
+        } else {
+            System.err.println("You can specify up to three arguments: height, width of the board and number of steps to be performed.");
+            //System.exit(1);
+        }
         
         int step = m / (NTHREADS);
 

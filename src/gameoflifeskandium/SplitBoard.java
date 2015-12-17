@@ -13,7 +13,6 @@ import gameoflife.Board;
  * @author stefano
  */
 class SplitBoard implements Split<Board, IntervalBoard> {
-    
     int numParts;
 
     public SplitBoard(int availableProcessors) {

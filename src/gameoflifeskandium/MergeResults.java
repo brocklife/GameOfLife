@@ -13,14 +13,9 @@ import gameoflife.Board;
  * @author stefano
  */
 class MergeResults implements Merge<Board, Board>{ 
-
-    public MergeResults(){
-    }
-
     @Override
     public Board merge(Board[] param) throws Exception {
         param[0].swapBoards();
         return param[0];
-    }
-    
+    }  
 }
