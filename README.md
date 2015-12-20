@@ -1,5 +1,5 @@
 # GameOfLife
-A Java implementation of Game of Life, both sequential, multithreaded and built using the [Skandium](https://github.com/mleyton/Skandium) framework for parallel skeletons.
+A Java implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), both sequential, multithreaded and built using the [Skandium](https://github.com/mleyton/Skandium) framework for parallel skeletons.
 
 A working version of the [Skandium](https://github.com/mleyton/Skandium) library can be downloaded from here [Skandium.jar](http://stefanoforti.altervista.org/Skandium).
 
