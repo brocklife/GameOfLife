@@ -3,7 +3,7 @@ A Java implementation of Game of Life, both sequential, multithreaded and built 
 
 A working version of the [Skandium](https://github.com/mleyton/Skandium) library can be downloaded from here [Skandium.jar](http://stefanoforti.altervista.org/Skandium).
 
-The program sequential program was tested on my i7 laptop and so was the multithreaded version. In addition to that,
+The sequential program was tested on my i7 laptop and so was the multithreaded version. In addition to that,
 the parallel program has been run on a 8 cores Xeon machine. These are the obtained timings for computing 1000 steps
 over a 1000x1000 board:
 
