@@ -21,8 +21,7 @@ public class GraphicBoard extends JPanel {
     private BufferedImage buffered;
 
     
-    public GraphicBoard(Board b) {
-        this.setDoubleBuffered(true);
+    public GraphicBoard(Board b) {  
         board = b;
     }
     

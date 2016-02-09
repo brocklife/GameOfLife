@@ -7,10 +7,6 @@ package gameoflife;
 
 import java.util.Random;
 
-/**
- *
- * @author stefa
- */
 public class Board {
 
     public final static byte ALIVE = 1;

@@ -7,6 +7,7 @@ package gameoflife;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Insets;
 import javax.swing.JFrame;
 
 /**
@@ -28,11 +29,14 @@ public class GameOfLife {
         
         JFrame frame = new JFrame("Game of Life - ST");
         Graphics g = frame.getGraphics();
+        frame.pack();
+        Insets insets = frame.getInsets();
         frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+        frame.paint(g);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(n,m);
+        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
         frame.setVisible(true);
-        
+
         final long startTime = System.currentTimeMillis();
         for(int k = 0; k < steps; k++){
             board.makeSteps(1, 0, m);

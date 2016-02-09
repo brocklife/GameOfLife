@@ -4,6 +4,7 @@ import gameoflife.GraphicBoard;
 import gameoflife.Board;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
@@ -59,11 +60,14 @@ public class GameOfLifeMultiThreaded {
 
         JFrame frame = new JFrame("Game of Life - MT");
         Graphics g = frame.getGraphics();
+        frame.pack();
+        Insets insets = frame.getInsets();
         frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
         frame.paint(g);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(n, m);
+        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
         frame.setVisible(true);
+
 
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, new Runnable() {
             public void run() {

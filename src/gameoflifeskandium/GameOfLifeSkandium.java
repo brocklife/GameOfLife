@@ -13,7 +13,9 @@ import cl.niclabs.skandium.skeletons.Skeleton;
 import gameoflife.Board;
 import gameoflife.GraphicBoard;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import javax.swing.JFrame;
@@ -25,35 +27,33 @@ import javax.swing.JFrame;
  */
 public class GameOfLifeSkandium {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         int m = 1000;
         int n = 1000;
         int times = 1000;
         int THREADS = Runtime.getRuntime().availableProcessors();
-        Board b = new Board(m, n);
+        Board board = new Board(m, n);
         Skandium skandium = new Skandium(THREADS);
         Skeleton<Board, Board> gof = new Map<>(
                                             new SplitBoard(THREADS),
-                                            new ComputeSteps(b),
-                                            new MergeResults(b));
+                                            new ComputeSteps(board),
+                                            new MergeResults(board));
         
         Skeleton<Board, Board> forLoop = new For(gof, times);
         
-        b.initializeBoard();
-        
+        board.initializeBoard();
         Stream<Board,Board> stream = skandium.newStream(forLoop);
         long init = System.currentTimeMillis();
-        Future<Board> future = stream.input(b);
+        Future<Board> future = stream.input(board);
         
         JFrame frame = new JFrame("Game of Life - Skandium");
         Graphics g = frame.getGraphics();
-        frame.getContentPane().add(new GraphicBoard(b), BorderLayout.CENTER);
+        frame.pack();
+        Insets insets = frame.getInsets();
+        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
         frame.paint(g);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(n, m);
+        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
         frame.setVisible(true);
 
         Board res = future.get();
