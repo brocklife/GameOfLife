@@ -1,9 +1,9 @@
 # GameOfLife
-A Java implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), both sequential, multithreaded and built using the [Skandium](https://github.com/mleyton/Skandium) framework for parallel skeletons.
+A Java implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) sequential, multithreaded and built using the [Skandium](https://github.com/mleyton/Skandium) framework for parallel skeletons.
 
 A working version of the [Skandium](https://github.com/mleyton/Skandium) library can be downloaded from here [Skandium.jar](http://stefanoforti.altervista.org/Skandium).
 
-The sequential program was tested on my i7 laptop and so was the multithreaded version. In addition to that,
+The sequential program was tested on my i7 laptop and so were the multithreaded and the Skandium versions. In addition to that,
 the parallel program has been run on a 8 cores Xeon machine. These are the obtained timings for computing 1000 steps
 over a 1000x1000 board:
 
