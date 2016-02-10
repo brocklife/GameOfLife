@@ -26,7 +26,7 @@ public class GameOfLifeMultiThreaded {
         int NTHREADS = Runtime.getRuntime().availableProcessors();
         int m = 500;
         int n = 500;
-        int steps = 1000;
+        int steps = 1000000;
         
         if (args.length == 3) {
             try {
@@ -55,8 +55,8 @@ public class GameOfLifeMultiThreaded {
         int step = m / (NTHREADS);
 
         final Board board = new Board(m, n);
-        board.initializeBoard();
-        //board.initializeGlider();
+        //board.initializeBoard();
+        board.initializeGlider();
 
         JFrame frame = new JFrame("Game of Life - MT");
         Graphics g = frame.getGraphics();

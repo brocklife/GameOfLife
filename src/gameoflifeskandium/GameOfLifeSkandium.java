@@ -13,7 +13,6 @@ import cl.niclabs.skandium.skeletons.Skeleton;
 import gameoflife.Board;
 import gameoflife.GraphicBoard;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.concurrent.ExecutionException;
@@ -28,8 +27,8 @@ import javax.swing.JFrame;
 public class GameOfLifeSkandium {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int m = 1000;
-        int n = 1000;
+        int m = 500;
+        int n = 500;
         int times = 1000;
         int THREADS = Runtime.getRuntime().availableProcessors();
         Board board = new Board(m, n);
