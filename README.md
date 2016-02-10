@@ -15,3 +15,7 @@ over a 1000x1000 board:
 
 8 cores (16 contexts):  9 s
 
+Below, a screenshot of the GoL visualisation is reported.
+
+![alt tag](https://github.com/teto1992/GameOfLife/blob/master/skandium.png)
+
