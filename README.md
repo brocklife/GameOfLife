@@ -6,9 +6,9 @@ A working version of the [Skandium](https://github.com/mleyton/Skandium) library
 The sequential program was tested on my i7 laptop and so were the multithreaded and the Skandium versions. In addition to that,
 the parallel program has been run on a 8 cores Xeon machine. These are the obtained timings for computing 1000 steps
 over a 1000x1000 board:
-<div style="text-align:center">
+
 ![alt tag](https://github.com/teto1992/GameOfLife/blob/master/plot.PNG)
-</div>
+
 1 core :                70 s
 
 2 cores (4 contexts):   37 s
@@ -16,7 +16,7 @@ over a 1000x1000 board:
 8 cores (16 contexts):  9 s
 
 Below, a screenshot of the GoL visualisation is reported.
-<div style="text-align:center">
+
 ![alt tag](https://github.com/teto1992/GameOfLife/blob/master/skandium.png)
-</div>
+
 
