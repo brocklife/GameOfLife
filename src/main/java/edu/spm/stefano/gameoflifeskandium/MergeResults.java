@@ -1,7 +1,7 @@
 package edu.spm.stefano.gameoflifeskandium;
 
 import cl.niclabs.skandium.muscles.Merge;
-import edu.spm.stefano.gameoflifemaven.Board;
+import edu.spm.stefano.gameoflife.Board;
 
 class MergeResults implements Merge<Board, Board>{ 
     Board board;

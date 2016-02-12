@@ -1,7 +1,7 @@
 package edu.spm.stefano.gameoflifeskandium;
 
 import cl.niclabs.skandium.muscles.Execute;
-import edu.spm.stefano.gameoflifemaven.Board;
+import edu.spm.stefano.gameoflife.Board;
 
 class ComputeSteps implements Execute<Interval, Board> {
     Board board;
