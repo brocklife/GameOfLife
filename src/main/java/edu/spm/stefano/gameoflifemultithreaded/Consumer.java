@@ -38,15 +38,12 @@ public class Consumer implements Runnable {
             board.makeStep(start, n);
             try {
                 barrier.await();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BrokenBarrierException ex) {
+            } catch (InterruptedException | BrokenBarrierException ex) {
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
             }
  
         }
         final long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime);
-        return;
     }
 }

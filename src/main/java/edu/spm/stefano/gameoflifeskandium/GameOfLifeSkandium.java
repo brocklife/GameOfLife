@@ -22,8 +22,8 @@ import javax.swing.JFrame;
 public class GameOfLifeSkandium {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int m = 500;
-        int n = 500;
+        int m = 1000;
+        int n = 1000;
         int times = 1000;
         int THREADS = Runtime.getRuntime().availableProcessors();
         Board board = new Board(m, n);

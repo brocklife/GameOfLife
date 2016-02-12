@@ -24,9 +24,9 @@ public class GameOfLifeMultiThreaded {
      */
     public static void main(String[] args) throws InterruptedException, BrokenBarrierException {
         int NTHREADS = Runtime.getRuntime().availableProcessors();
-        int m = 500;
-        int n = 500;
-        int steps = 1000000;
+        int m = 1000;
+        int n = 1000;
+        int steps = 1000;
         
         if (args.length == 3) {
             try {
@@ -55,8 +55,8 @@ public class GameOfLifeMultiThreaded {
         int step = m / (NTHREADS);
 
         final Board board = new Board(m, n);
-        //board.initializeBoard();
-        board.initializeGlider();
+        board.initializeBoard();
+        //board.initializeGlider();
 
         JFrame frame = new JFrame("Game of Life - MT");
         Graphics g = frame.getGraphics();
@@ -69,11 +69,7 @@ public class GameOfLifeMultiThreaded {
         frame.setVisible(true);
 
 
-        final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, new Runnable() {
-            public void run() {
-                board.swapBoards();
-            }
-        });
+        final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards);
 
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
 
