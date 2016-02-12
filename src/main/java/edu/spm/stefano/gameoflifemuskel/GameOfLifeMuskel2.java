@@ -31,7 +31,7 @@ public class GameOfLifeMuskel2 {
         MuskelProcessor.from(1,2,3,4,5,6).
                 withContext(MuskelContext.builder().local().build()).
                 executeOn(MuskelExecutor.local()).
-                map(i->Thread.currentThread().getName() + "Hello " + i).toList().
+                map(i->Thread.currentThread().getName() + "Hello " + i + "\n").toList().
                 subscribe(s->System.out.println(s));
     }
     
