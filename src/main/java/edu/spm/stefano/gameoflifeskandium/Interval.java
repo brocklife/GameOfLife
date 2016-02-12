@@ -1,4 +1,4 @@
-package gameoflifeskandium;
+package edu.spm.stefano.gameoflifeskandium;
 
 class Interval {
     int start;

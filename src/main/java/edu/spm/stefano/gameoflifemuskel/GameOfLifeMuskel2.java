@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameoflifemuskel2;
+package edu.spm.stefano.gameoflifemuskel;
 
-import gameoflife.Board;
-import gameoflife.GraphicBoard;
+import edu.spm.stefano.gameoflife.Board;
+import edu.spm.stefano.gameoflife.GraphicBoard;
+import it.reactive.muskel.MuskelExecutor;
+import it.reactive.muskel.MuskelProcessor;
+import it.reactive.muskel.context.MuskelContext;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,7 +28,11 @@ public class GameOfLifeMuskel2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MuskelProcessor.from(1,2,3,4,5,6).
+                withContext(MuskelContext.builder().local().build()).
+                executeOn(MuskelExecutor.local()).
+                map(i->Thread.currentThread().getName() + "Hello " + i).toList().
+                subscribe(s->System.out.println(s));
     }
     
 }

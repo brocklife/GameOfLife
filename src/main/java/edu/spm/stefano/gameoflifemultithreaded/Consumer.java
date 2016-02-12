@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameoflifemultithreaded;
+package edu.spm.stefano.gameoflifemultithreaded;
 
-import gameoflife.Board;
+import edu.spm.stefano.gameoflife.Board;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.logging.Level;

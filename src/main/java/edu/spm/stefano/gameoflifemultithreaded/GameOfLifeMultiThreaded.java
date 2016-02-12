@@ -1,7 +1,7 @@
-package gameoflifemultithreaded;
+package edu.spm.stefano.gameoflifemultithreaded;
 
-import gameoflife.GraphicBoard;
-import gameoflife.Board;
+import edu.spm.stefano.gameoflife.GraphicBoard;
+import edu.spm.stefano.gameoflife.Board;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Insets;

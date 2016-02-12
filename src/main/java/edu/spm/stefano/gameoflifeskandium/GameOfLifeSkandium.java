@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package gameoflifeskandium;
+package edu.spm.stefano.gameoflifeskandium;
 
 import cl.niclabs.skandium.Skandium;
 import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.For;
 import cl.niclabs.skandium.skeletons.Map;
 import cl.niclabs.skandium.skeletons.Skeleton;
-import gameoflife.Board;
-import gameoflife.GraphicBoard;
+import edu.spm.stefano.gameoflifemaven.Board;
+import edu.spm.stefano.gameoflifemaven.GraphicBoard;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Insets;

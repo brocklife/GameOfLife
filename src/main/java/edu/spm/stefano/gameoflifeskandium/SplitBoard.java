@@ -1,7 +1,7 @@
-package gameoflifeskandium;
+package edu.spm.stefano.gameoflifeskandium;
 
 import cl.niclabs.skandium.muscles.Split;
-import gameoflife.Board;
+import edu.spm.stefano.gameoflifemaven.Board;
 
 class SplitBoard implements Split<Board, Interval> {
     int numParts;
