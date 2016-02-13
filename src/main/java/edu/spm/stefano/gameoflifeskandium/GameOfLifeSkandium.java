@@ -25,11 +25,11 @@ public class GameOfLifeSkandium {
         int m = 1000;
         int n = 1000;
         int times = 1000;
-        int THREADS = Runtime.getRuntime().availableProcessors();
+        int NTHREADS = Runtime.getRuntime().availableProcessors();
         Board board = new Board(m, n);
-        Skandium skandium = new Skandium(THREADS);
+        Skandium skandium = new Skandium(NTHREADS);
         Skeleton<Board, Board> gof = new Map<>(
-                                            new SplitBoard(THREADS),
+                                            new SplitBoard(NTHREADS),
                                             new ComputeSteps(board),
                                             new MergeResults(board));
         
