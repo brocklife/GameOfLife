@@ -48,7 +48,6 @@ public class GameOfLifeMuskel2 {
         Integer step = m / (NTHREADS);
         Board board = new Board(m, n);
         board.initializeBoard();
-        //manage the local thread pool as a context
         
         JFrame frame = new JFrame("Game of Life - Muskel2");
         Graphics g = frame.getGraphics();
@@ -76,17 +75,15 @@ public class GameOfLifeMuskel2 {
             
         for (int k = 0; k < times; k++){    
             MuskelProcessor.from(bounds)
-                    .withContext(MuskelContext.builder().local().build())
-                    .executeOn(MuskelExecutor.local())
+                    .withContext(context)
                     .map((Couple b) -> {
-                        //System.out.println(Thread.currentThread());
                         board.makeStep(b.a, b.b);return b;}, local())
                     .toList()
                     .toBlocking()
                     .single();
             board.swapBoards();
-           
         }
+        
         long ended = System.currentTimeMillis();
         System.out.println(ended-init);
         
