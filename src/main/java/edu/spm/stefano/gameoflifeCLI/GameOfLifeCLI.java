@@ -32,7 +32,7 @@ public class GameOfLifeCLI {
     public static void main(String[] args) throws BrokenBarrierException, InterruptedException, ExecutionException {
         Options options = new Options();
 
-        int m = 500, n = 500, t = 1000;
+        int m = 1000, n = 1000, t = 1000;
         boolean graphicBoard = false;
         boolean gliderConfig = false;
         String implementation = "seq";
@@ -67,7 +67,6 @@ public class GameOfLifeCLI {
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("m")) {
                 m = Integer.parseInt(cmd.getOptionValue("m"));
-                System.out.println(m);
             }
             if (cmd.hasOption("n")) {
                 n = Integer.parseInt(cmd.getOptionValue("n"));
@@ -81,8 +80,8 @@ public class GameOfLifeCLI {
             if (cmd.hasOption("glider")) {
                 gliderConfig = true;
             }
-            if(cmd.hasOption("threads")){
-                NTHREADS = Integer.parseInt(cmd.getOptionValue(implementation));
+            if(cmd.hasOption("N")){
+                NTHREADS = Integer.parseInt(cmd.getOptionValue("N"));
             }
             if (cmd.hasOption("f")) {
                 String s = cmd.getOptionValue("f");

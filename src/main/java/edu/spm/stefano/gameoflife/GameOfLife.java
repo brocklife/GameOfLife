@@ -16,8 +16,8 @@ public class GameOfLife {
      */
     public static void main(String[] args) {
 
-        int m = 500;
-        int n = 500;
+        int m = 1000;
+        int n = 1000;
         int steps = 1000;
         boolean glider = false, graphics = false;
 
