@@ -65,7 +65,7 @@ public class GameOfLife {
         }
 
         if (graphics) {
-            JFrame frame = new JFrame("Game of Life - ST");
+            JFrame frame = new JFrame("Game of Life - Sequential");
             Graphics g = frame.getGraphics();
             frame.pack();
             Insets insets = frame.getInsets();

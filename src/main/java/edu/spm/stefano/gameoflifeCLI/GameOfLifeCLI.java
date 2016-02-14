@@ -9,6 +9,7 @@ import edu.spm.stefano.gameoflife.GameOfLife;
 import edu.spm.stefano.gameoflifemultithreaded.GameOfLifeMultiThreaded;
 import edu.spm.stefano.gameoflifemuskel.GameOfLifeMuskel2;
 import edu.spm.stefano.gameoflifeskandium.GameOfLifeSkandium;
+import java.util.Arrays;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.ExecutionException;
 import org.apache.commons.cli.CommandLine;
@@ -62,6 +63,7 @@ public class GameOfLifeCLI {
             CommandLine cmd = parser.parse(options, args);
             if (cmd.hasOption("m")) {
                 m = Integer.parseInt(cmd.getOptionValue("m"));
+                System.out.println(m);
             }
             if (cmd.hasOption("n")) {
                 n = Integer.parseInt(cmd.getOptionValue("n"));
@@ -92,6 +94,7 @@ public class GameOfLifeCLI {
                         break;
                     default:
                         System.err.println("Wrong implementation code: seq, mt, sk, mu2 are allowed only.");
+                        System.exit(1);
                         break;
                 }
             }
@@ -106,6 +109,8 @@ public class GameOfLifeCLI {
             Boolean.toString(graphicBoard), 
             Boolean.toString(gliderConfig), 
         };
+        
+        System.out.println(Arrays.toString(args2));
         
         switch (implementation) {
             case "seq":
