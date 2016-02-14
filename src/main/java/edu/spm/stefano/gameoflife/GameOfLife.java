@@ -19,7 +19,6 @@ public class GameOfLife {
         int m = 500;
         int n = 500;
         int steps = 1000;
-        Board board = new Board(m, n);
         boolean glider = false, graphics = false;
 
         if (args.length == 6) {
@@ -57,7 +56,9 @@ public class GameOfLife {
             System.err.println("You can specify up to three arguments: height, width of the board and number of steps to be performed.");
             System.exit(1);
         }
-
+        
+        Board board = new Board(m, n);
+        
         if (glider) {
             board.initializeGlider();
         } else {

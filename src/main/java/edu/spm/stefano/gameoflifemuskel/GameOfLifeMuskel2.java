@@ -24,31 +24,30 @@ import javax.swing.JFrame;
  * @author stefano
  */
 public class GameOfLifeMuskel2 {
-    
-    static Board makeStep(Board b, int m){
+
+    static Board makeStep(Board b, int m) {
         b.makeStep(0, m);
         return b;
     }
-    
-    static Board swapBoards(Board b){
+
+    static Board swapBoards(Board b) {
         b.swapBoards();
         return b;
     }
-
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         int m = 1000;
         int n = 1000;
         int steps = 1000;
         int NTHREADS = Runtime.getRuntime().availableProcessors();
         boolean glider = false;
         boolean graphics = false;
-        
-               if (args.length == 6) {
+
+        if (args.length == 6) {
             try {
                 m = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
@@ -92,14 +91,14 @@ public class GameOfLifeMuskel2 {
 
         Integer step = m / (NTHREADS);
         Board board = new Board(m, n);
-                
-        if (glider){
+
+        if (glider) {
             board.initializeGlider();
-        }else{
+        } else {
             board.initializeBoard();
         }
-        
-        if (graphics){
+
+        if (graphics) {
             JFrame frame = new JFrame("Game of Life - Muskel2");
             Graphics g = frame.getGraphics();
             frame.pack();
@@ -110,34 +109,37 @@ public class GameOfLifeMuskel2 {
             frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
             frame.setVisible(true);
         }
+        
         MuskelContext context = MuskelContext.builder().local().defaultPoolSize(NTHREADS).build();
-        
-        Couple[] bounds = new Couple[NTHREADS]; 
-        
-        for (int j = 0; j < NTHREADS; j++){
+
+        Couple[] bounds = new Couple[NTHREADS];
+
+        for (int j = 0; j < NTHREADS; j++) {
             if (j < NTHREADS - 1) {
-                bounds[j] = new Couple(j*step, step);
+                bounds[j] = new Couple(j * step, step);
             } else {
-                bounds[j] = new Couple(j*step, m-j*step);
+                bounds[j] = new Couple(j * step, m - j * step);
             }
         }
         
         long init = System.currentTimeMillis();
-            
-        for (int k = 0; k < steps; k++){    
+
+        for (int k = 0; k < steps; k++) {
             MuskelProcessor.from(bounds)
                     .withContext(context)
                     .map((Couple b) -> {
-                        board.makeStep(b.a, b.b);return b;}, local())
+                        board.makeStep(b.a, b.b);
+                        return b;
+                    }, local())
                     .toList()
                     .toBlocking()
                     .single();
             board.swapBoards();
         }
-        
+
         long ended = System.currentTimeMillis();
-        System.out.println(ended-init);
-        
+        System.out.println(ended - init);
+
     }
-    
+
 }

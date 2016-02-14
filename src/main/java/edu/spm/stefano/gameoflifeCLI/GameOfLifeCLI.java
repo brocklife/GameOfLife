@@ -16,7 +16,6 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -28,6 +27,7 @@ public class GameOfLifeCLI {
 
     /**
      * @param args the command line arguments
+     * @throws java.util.concurrent.BrokenBarrierException
      */
     public static void main(String[] args) throws BrokenBarrierException, InterruptedException, ExecutionException {
         Options options = new Options();
