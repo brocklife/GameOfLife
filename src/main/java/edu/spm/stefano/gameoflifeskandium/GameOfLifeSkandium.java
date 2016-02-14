@@ -99,12 +99,10 @@ public class GameOfLifeSkandium {
 
         board.initializeBoard();
         Stream<Board, Board> stream = skandium.newStream(forLoop);
-        long init = System.currentTimeMillis();
+        final long startTime = System.currentTimeMillis();
         Future<Board> future = stream.input(board);
-
         Board res = future.get();
-        long ended = System.currentTimeMillis();
-
-        System.out.println(ended - init);
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Skandium - Executed in " + (endTime - startTime) + " ms!");
     }
 }

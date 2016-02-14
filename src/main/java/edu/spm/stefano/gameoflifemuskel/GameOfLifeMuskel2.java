@@ -122,7 +122,7 @@ public class GameOfLifeMuskel2 {
             }
         }
         
-        long init = System.currentTimeMillis();
+        final long startTime = System.currentTimeMillis();
 
         for (int k = 0; k < steps; k++) {
             MuskelProcessor.from(bounds)
@@ -133,12 +133,12 @@ public class GameOfLifeMuskel2 {
                     }, local())
                     .toList()
                     .toBlocking()
-                    .single();
+                    .first();
             board.swapBoards();
         }
 
-        long ended = System.currentTimeMillis();
-        System.out.println(ended - init);
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Muskel2 - Executed in " + (endTime - startTime) + " ms!");
 
     }
 

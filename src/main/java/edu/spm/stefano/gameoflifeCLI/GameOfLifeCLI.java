@@ -136,6 +136,8 @@ public class GameOfLifeCLI {
                 System.err.println("Wrong implementation code: seq, mt, sk, mu2 are allowed only.");
                 break;
         }
+        
+        System.exit(0);
 
     }
 

@@ -97,7 +97,7 @@ public class GameOfLifeMultiThreaded {
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards);
 
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
-
+        final long startTime = System.currentTimeMillis();
         for (int j = 0; j < NTHREADS; j++) {
             if (j < NTHREADS - 1) {
                 threadPool.execute(new Consumer(board, j * step, step, steps, barrier, NTHREADS));
@@ -105,8 +105,9 @@ public class GameOfLifeMultiThreaded {
                 threadPool.execute(new Consumer(board, j * step, m - (step * j), steps, barrier, NTHREADS));
             }
         }
-
         threadPool.shutdown();
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Multithreaded - Executed in " + (endTime - startTime) + " ms!");
 
     }
 }

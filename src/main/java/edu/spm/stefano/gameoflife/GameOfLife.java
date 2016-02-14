@@ -84,6 +84,6 @@ public class GameOfLife {
         }
         final long endTime = System.currentTimeMillis();
 
-        System.out.println("Executed in " + (endTime - startTime) + " ms!");
+        System.out.println("Sequential - Executed in " + (endTime - startTime) + " ms!");
     }
 }

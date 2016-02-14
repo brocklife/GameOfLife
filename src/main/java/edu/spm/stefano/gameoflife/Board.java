@@ -81,134 +81,113 @@ public class Board {
         System.out.print("\n");
     }
 
-    private int modulo(int i, int m){
+    private int modulo(int i, int m) {
         int result;
-        if (i >= 0 && i < m)
-            result = i;
-        else
-            if(i <= 0)
-                result = i+m;
-            else
-                result = i-m; 
+        if (i == -1)
+            result = m - 1;
+        else if ( i == m)
+            result = 0;
+        else result = i;
         return result;
     }
 
     public int countAliveNeighbours(int i, int j) {
-        int result = 
-                boardFrom[modulo(i - 1, M)][modulo(j - 1, N)]
+        int result
+                = boardFrom[modulo(i - 1, M)][modulo(j - 1, N)]
                 + boardFrom[modulo(i - 1, M)][modulo(j, N)]
                 + boardFrom[modulo(i - 1, M)][modulo(j + 1, N)]
                 + boardFrom[modulo(i, M)][modulo(j - 1, N)]
                 + boardFrom[modulo(i, M)][modulo(j + 1, N)]
                 + boardFrom[modulo(i + 1, M)][modulo(j - 1, N)]
                 + boardFrom[modulo(i + 1, M)][modulo(j, N)]
-                + boardFrom[modulo(i + 1, M)][modulo(j + 1, N)] 
-                ;
+                + boardFrom[modulo(i + 1, M)][modulo(j + 1, N)];
         return result;
     }
 
     public int optimisedCountAliveNeighbours(int i, int j) {
         int result = 0;
         if (i > 0 && i < M - 1 && j > 0 && j < N - 1) {
-                result = result 
-                + boardFrom[i-1][j-1]
-                + boardFrom[i - 1][j]
-                + boardFrom[i - 1][j + 1]
-                + boardFrom[i][j - 1]
-                + boardFrom[i][j + 1]
-                + boardFrom[i + 1][j - 1]
-                + boardFrom[i + 1][j]
-                + boardFrom[i + 1][j + 1] 
-                ;
+            result = boardFrom[i - 1][j - 1]
+                    + boardFrom[i - 1][j]
+                    + boardFrom[i - 1][j + 1]
+                    + boardFrom[i][j - 1]
+                    + boardFrom[i][j + 1]
+                    + boardFrom[i + 1][j - 1]
+                    + boardFrom[i + 1][j]
+                    + boardFrom[i + 1][j + 1];
         } else if (i == 0 && j == 0) { //(0,0)
-                result = result 
-                + boardFrom[M-1][N-1]
-                + boardFrom[M-1][0]
-                + boardFrom[M-1][1]
-                + boardFrom[0][N - 1]
-                + boardFrom[0][1]
-                + boardFrom[1][N - 1]
-                + boardFrom[1][0]
-                + boardFrom[1][1] 
-                ;
+            result = boardFrom[M - 1][N - 1]
+                    + boardFrom[M - 1][0]
+                    + boardFrom[M - 1][1]
+                    + boardFrom[0][N - 1]
+                    + boardFrom[0][1]
+                    + boardFrom[1][N - 1]
+                    + boardFrom[1][0]
+                    + boardFrom[1][1];
         } else if (i == 0 && j == N - 1) { //(0,N-1)
-                result = result 
-                + boardFrom[M-1][N-2]
-                + boardFrom[M-1][N-1]
-                + boardFrom[M-1][0]
-                + boardFrom[0][N-2]
-                + boardFrom[0][0]
-                + boardFrom[1][N-2]
-                + boardFrom[1][N-1]
-                + boardFrom[1][0] 
-                ;            
-            } else if (i == M - 1 && j == N - 1) { //(M-1,N-1)
-                result = result 
-                + boardFrom[M-2][N-2]
-                + boardFrom[M-2][N-1]
-                + boardFrom[M-2][0]
-                + boardFrom[M-1][N-2]
-                + boardFrom[M-1][0]
-                + boardFrom[0][N-2]
-                + boardFrom[0][N-1]
-                + boardFrom[0][0] 
-                ;
-            } else if (i == M - 1 && j == 0){
-                result = result 
-                + boardFrom[i-1][N-1]
-                + boardFrom[i - 1][j]
-                + boardFrom[i - 1][j + 1]
-                + boardFrom[i][N - 1]
-                + boardFrom[i][j + 1]
-                + boardFrom[0][N - 1]
-                + boardFrom[0][j]
-                + boardFrom[0][j + 1] 
-                ;
-            } else if (j == 0){ 
-                result = result 
-                + boardFrom[i-1][N-1]
-                + boardFrom[i - 1][j]
-                + boardFrom[i - 1][j + 1]
-                + boardFrom[i][N - 1]
-                + boardFrom[i][j + 1]
-                + boardFrom[i + 1][N - 1]
-                + boardFrom[i + 1][j]
-                + boardFrom[i + 1][j + 1] 
-                ;
-            } else if (j == N - 1){
-                result = result 
-                + boardFrom[i-1][j-1]
-                + boardFrom[i - 1][j]
-                + boardFrom[i - 1][0]
-                + boardFrom[i][j - 1]
-                + boardFrom[i][0]
-                + boardFrom[i + 1][j - 1]
-                + boardFrom[i + 1][j]
-                + boardFrom[i + 1][0] 
-                ;             
-            } else if (i == 0){
-                result = result 
-                + boardFrom[M-1][j-1]
-                + boardFrom[M-1][j]
-                + boardFrom[M-1][0]
-                + boardFrom[i][j - 1]
-                + boardFrom[i][j + 1]
-                + boardFrom[i + 1][j - 1]
-                + boardFrom[i + 1][j]
-                + boardFrom[i + 1][0] 
-                ; 
-            } else if (i == M-1){
-                result = result 
-                + boardFrom[i-1][j-1]
-                + boardFrom[i - 1][j]
-                + boardFrom[i - 1][0]
-                + boardFrom[i][j - 1]
-                + boardFrom[i][j + 1]
-                + boardFrom[0][j - 1]
-                + boardFrom[0][j]
-                + boardFrom[0][0] 
-                ;
-            }
+            result =  boardFrom[M - 1][N - 2]
+                    + boardFrom[M - 1][N - 1]
+                    + boardFrom[M - 1][0]
+                    + boardFrom[0][N - 2]
+                    + boardFrom[0][0]
+                    + boardFrom[1][N - 2]
+                    + boardFrom[1][N - 1]
+                    + boardFrom[1][0];
+        } else if (i == M - 1 && j == N - 1) { //(M-1,N-1)
+            result =  boardFrom[M - 2][N - 2]
+                    + boardFrom[M - 2][N - 1]
+                    + boardFrom[M - 2][0]
+                    + boardFrom[M - 1][N - 2]
+                    + boardFrom[M - 1][0]
+                    + boardFrom[0][N - 2]
+                    + boardFrom[0][N - 1]
+                    + boardFrom[0][0];
+        } else if (i == M - 1 && j == 0) { //(M-1,0)
+            result =  boardFrom[M - 2][N - 1]
+                    + boardFrom[M - 2][0]
+                    + boardFrom[M - 2][1]
+                    + boardFrom[M - 1][N - 1]
+                    + boardFrom[M - 1][1]
+                    + boardFrom[0][N - 1]
+                    + boardFrom[0][0]
+                    + boardFrom[0][1];
+        } else if (j == 0) {
+            result =  boardFrom[i - 1][N - 1]
+                    + boardFrom[i - 1][j]
+                    + boardFrom[i - 1][j + 1]
+                    + boardFrom[i][N - 1]
+                    + boardFrom[i][j + 1]
+                    + boardFrom[i + 1][N - 1]
+                    + boardFrom[i + 1][j]
+                    + boardFrom[i + 1][j + 1];
+        } else if (j == N - 1) {
+            result =  boardFrom[i - 1][j - 1]
+                    + boardFrom[i - 1][j]
+                    + boardFrom[i - 1][0]
+                    + boardFrom[i][j - 1]
+                    + boardFrom[i][0]
+                    + boardFrom[i + 1][j - 1]
+                    + boardFrom[i + 1][j]
+                    + boardFrom[i + 1][0];
+        } else if (i == 0) {
+            result = boardFrom[M-1][j - 1]
+                    + boardFrom[M-1][j]
+                    + boardFrom[M-1][j + 1]
+                    + boardFrom[i][j - 1]
+                    + boardFrom[i][j + 1]
+                    + boardFrom[i + 1][j - 1]
+                    + boardFrom[i + 1][j]
+                    + boardFrom[i + 1][j + 1];
+        } else if (i == M - 1) {
+            result = boardFrom[i - 1][j - 1]
+                    + boardFrom[i - 1][j]
+                    + boardFrom[i - 1][j + 1]
+                    + boardFrom[i][j - 1]
+                    + boardFrom[i][j + 1]
+                    + boardFrom[0][j - 1]
+                    + boardFrom[0][j]
+                    + boardFrom[0][j + 1];
+        }
         return result;
     }
 
