@@ -131,7 +131,6 @@ public class GameOfLifeMuskel2 {
                         board.makeStep(b.a, b.b);
                         return b;
                     }, local())
-                    .toList()
                     .toBlocking()
                     .first();
             board.swapBoards();
