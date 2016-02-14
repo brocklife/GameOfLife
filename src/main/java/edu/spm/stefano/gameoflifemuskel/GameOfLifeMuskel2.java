@@ -7,16 +7,12 @@ package edu.spm.stefano.gameoflifemuskel;
 
 import edu.spm.stefano.gameoflife.Board;
 import edu.spm.stefano.gameoflife.GraphicBoard;
-import it.reactive.muskel.MuskelExecutor;
 import static it.reactive.muskel.MuskelExecutor.local;
 import it.reactive.muskel.MuskelProcessor;
 import it.reactive.muskel.context.MuskelContext;
-import it.reactive.muskel.functions.SerializableFunction;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -138,7 +134,5 @@ public class GameOfLifeMuskel2 {
 
         final long endTime = System.currentTimeMillis();
         System.out.println("Muskel2 - Executed in " + (endTime - startTime) + " ms!");
-
     }
-
 }
