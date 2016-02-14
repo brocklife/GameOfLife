@@ -14,7 +14,7 @@ public class GameOfLife {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         int m = 1000;
         int n = 1000;
@@ -64,10 +64,11 @@ public class GameOfLife {
         } else {
             board.initializeBoard();
         }
-
+        JFrame frame = null;
+        Graphics g = null;
         if (graphics) {
-            JFrame frame = new JFrame("Game of Life - Sequential");
-            Graphics g = frame.getGraphics();
+            frame = new JFrame("Game of Life - Sequential");
+            g = frame.getGraphics();
             frame.pack();
             Insets insets = frame.getInsets();
             frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
