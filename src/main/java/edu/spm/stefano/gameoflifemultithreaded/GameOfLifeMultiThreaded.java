@@ -27,8 +27,10 @@ public class GameOfLifeMultiThreaded {
         int m = 1000;
         int n = 1000;
         int steps = 1000;
+        boolean graphics = false;
+        boolean glider = false;
         
-        if (args.length == 3) {
+        if (args.length == 5) {
             try {
                 m = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
@@ -47,26 +49,45 @@ public class GameOfLifeMultiThreaded {
                 System.err.println("Argument" + args[2] + " must be an integer.");
                 System.exit(1);
             }
+            try {
+                graphics = Boolean.parseBoolean(args[3]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[3] + " must be a bool.");
+                System.exit(1);
+            }
+            try {
+                glider = Boolean.parseBoolean(args[4]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[4] + " must be a bool.");
+                System.exit(1);
+            }
         } else {
             System.err.println("You can specify up to three arguments: height, width of the board and number of steps to be performed.");
-            //System.exit(1);
+            System.exit(1);
         }
+        
         
         int step = m / (NTHREADS);
 
         final Board board = new Board(m, n);
-        board.initializeBoard();
-        //board.initializeGlider();
-
-//        JFrame frame = new JFrame("Game of Life - MT");
-//        Graphics g = frame.getGraphics();
-//        frame.pack();
-//        Insets insets = frame.getInsets();
-//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-//        frame.paint(g);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
-//        frame.setVisible(true);
+                
+        if (glider){
+            board.initializeGlider();
+        }else{
+            board.initializeBoard();
+        }
+        
+        if (graphics){
+            JFrame frame = new JFrame("Game of Life - ST");
+            Graphics g = frame.getGraphics();
+            frame.pack();
+            Insets insets = frame.getInsets();
+            frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+            frame.paint(g);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
+            frame.setVisible(true);
+        }
 
 
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards);
