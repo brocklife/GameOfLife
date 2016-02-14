@@ -22,7 +22,7 @@ public class GameOfLife {
         Board board = new Board(m, n);
         boolean glider = false, graphics = false;
 
-        if (args.length == 5) {
+        if (args.length == 6) {
             try {
                 m = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {

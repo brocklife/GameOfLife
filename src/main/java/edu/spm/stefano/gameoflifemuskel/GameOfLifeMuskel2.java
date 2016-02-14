@@ -48,7 +48,7 @@ public class GameOfLifeMuskel2 {
         boolean glider = false;
         boolean graphics = false;
         
-               if (args.length == 5) {
+               if (args.length == 6) {
             try {
                 m = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
@@ -77,6 +77,12 @@ public class GameOfLifeMuskel2 {
                 glider = Boolean.parseBoolean(args[4]);
             } catch (NumberFormatException e) {
                 System.err.println("Argument" + args[4] + " must be a bool.");
+                System.exit(1);
+            }
+            try {
+                NTHREADS = Integer.parseInt(args[5]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[5] + " must be a bool.");
                 System.exit(1);
             }
         } else {

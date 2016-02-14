@@ -36,6 +36,7 @@ public class GameOfLifeCLI {
         boolean graphicBoard = false;
         boolean gliderConfig = false;
         String implementation = "seq";
+        int NTHREADS = Runtime.getRuntime().availableProcessors();
 
         //number of rows
         Option rows = new Option("m", true, "number of rows for the GoL board");
@@ -49,13 +50,16 @@ public class GameOfLifeCLI {
         Option glider = new Option("glider", false, "use the \"glider\" initialisation");
         //framework
         Option framework = new Option("f", true, "select the GoL version to be run");
+        //NTHREADS
+        Option threads = new Option("N", true, "number of threads for parallel implementations");
         options
                 .addOption(rows)
                 .addOption(columns)
                 .addOption(times)
                 .addOption(graphics)
                 .addOption(glider)
-                .addOption(framework);
+                .addOption(framework)
+                .addOption(threads);
 
         CommandLineParser parser = new DefaultParser();
 
@@ -76,6 +80,9 @@ public class GameOfLifeCLI {
             }
             if (cmd.hasOption("glider")) {
                 gliderConfig = true;
+            }
+            if(cmd.hasOption("threads")){
+                NTHREADS = Integer.parseInt(cmd.getOptionValue(implementation));
             }
             if (cmd.hasOption("f")) {
                 String s = cmd.getOptionValue("f");
@@ -108,6 +115,7 @@ public class GameOfLifeCLI {
             Integer.toString(t), 
             Boolean.toString(graphicBoard), 
             Boolean.toString(gliderConfig), 
+            Integer.toString(NTHREADS)
         };
         
         System.out.println(Arrays.toString(args2));

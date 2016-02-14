@@ -29,8 +29,8 @@ public class GameOfLifeMultiThreaded {
         int steps = 1000;
         boolean graphics = false;
         boolean glider = false;
-        
-        if (args.length == 5) {
+
+        if (args.length == 6) {
             try {
                 m = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
@@ -61,23 +61,28 @@ public class GameOfLifeMultiThreaded {
                 System.err.println("Argument" + args[4] + " must be a bool.");
                 System.exit(1);
             }
+            try {
+                NTHREADS = Integer.parseInt(args[5]);
+            } catch (NumberFormatException e) {
+                System.err.println("Argument" + args[5] + " must be a bool.");
+                System.exit(1);
+            }
         } else {
             System.err.println("You can specify up to three arguments: height, width of the board and number of steps to be performed.");
             System.exit(1);
         }
-        
-        
+
         int step = m / (NTHREADS);
 
         final Board board = new Board(m, n);
-                
-        if (glider){
+
+        if (glider) {
             board.initializeGlider();
-        }else{
+        } else {
             board.initializeBoard();
         }
-        
-        if (graphics){
+
+        if (graphics) {
             JFrame frame = new JFrame("Game of Life - Multithreaded");
             Graphics g = frame.getGraphics();
             frame.pack();
