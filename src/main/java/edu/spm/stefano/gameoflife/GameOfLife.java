@@ -22,15 +22,15 @@ public class GameOfLife {
         Board board = new Board (m,n);
         board.initializeBoard();
         
-        JFrame frame = new JFrame("Game of Life - ST");
-        Graphics g = frame.getGraphics();
-        frame.pack();
-        Insets insets = frame.getInsets();
-        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-        frame.paint(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
-        frame.setVisible(true);
+//        JFrame frame = new JFrame("Game of Life - ST");
+//        Graphics g = frame.getGraphics();
+//        frame.pack();
+//        Insets insets = frame.getInsets();
+//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+//        frame.paint(g);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
+//        frame.setVisible(true);
 
         final long startTime = System.currentTimeMillis();
         for(int k = 0; k < steps; k++){

@@ -58,15 +58,15 @@ public class GameOfLifeMultiThreaded {
         board.initializeBoard();
         //board.initializeGlider();
 
-        JFrame frame = new JFrame("Game of Life - MT");
-        Graphics g = frame.getGraphics();
-        frame.pack();
-        Insets insets = frame.getInsets();
-        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
-        frame.paint(g);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
-        frame.setVisible(true);
+//        JFrame frame = new JFrame("Game of Life - MT");
+//        Graphics g = frame.getGraphics();
+//        frame.pack();
+//        Insets insets = frame.getInsets();
+//        frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
+//        frame.paint(g);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(insets.left + insets.right + n, insets.top + insets.bottom + m);
+//        frame.setVisible(true);
 
 
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards);
