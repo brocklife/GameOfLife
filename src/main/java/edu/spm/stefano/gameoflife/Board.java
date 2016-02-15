@@ -2,13 +2,17 @@ package edu.spm.stefano.gameoflife;
 
 import java.util.Random;
 
+/**
+ * The Board class which represents the World of this Game of Life
+ * @author stefano
+ */
 public class Board {
 
     public final static byte ALIVE = 1;
     public final static byte DEAD = 0;
 
-    byte[][] boardFrom;
-    byte[][] boardTo;
+    private byte[][] boardFrom;
+    private byte[][] boardTo;
     private final int M, N;
 
     public Board(int m, int n) {
@@ -17,27 +21,46 @@ public class Board {
         boardFrom = new byte[m][n];
         boardTo = new byte[m][n];
     }
-
+    
+    /**
+     * Returns the number of rows of the Board.
+     * @return M
+     */
     public int getHeight() {
         return M;
     }
-
+    
+    /**
+     * Returns the number of columns of the Board.
+     * @return N
+     */
     public int getWidth() {
         return N;
     }
-
+    
+    /**
+     * Returns the element in position (i,j) in the Board.
+     * @param i row identifier
+     * @param j column identifier
+     * @return 
+     */
     public byte getElement(int i, int j) {
         return boardFrom[i][j];
     }
-
+    
+    /**
+     * Sets the element (i,j) of the Board to a specific value.
+     * @param value the value to be set
+     * @param i row identifier
+     * @param j column identifier
+     */
     public void setElement(byte value, int i, int j) {
         boardFrom[i][j] = value;
     }
-
-    private synchronized void setElementTo(byte value, int i, int j) {
-        boardTo[i][j] = value;
-    }
-
+    
+    /**
+     * Initialises the Board to a random configuration.
+     */
     public void initializeBoard() {
         Random r = new Random();
         for (int i = 0; i < M; i++) {
@@ -47,7 +70,25 @@ public class Board {
             }
         }
     }
+ 
+    /**
+     * Initialises the Board to a pseudorandom configuration, dependent
+     * on the input seed.
+     * @param seed the seed for the pseudorandom generator
+     */
+    public void initializeBoard(long seed) {
+        Random r = new Random(seed);
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                byte number = (byte) (Math.abs(r.nextInt()) % 2);
+                boardFrom[i][j] = number;
+            }
+        }
+    }
 
+    /**
+     * Initialises the Board to the glider configuration.
+     */
     public void initializeGlider() {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
@@ -60,7 +101,11 @@ public class Board {
         boardFrom[2][1] = 1;
         boardFrom[2][2] = 1;
     }
-
+    /**
+     * Prints some rows of the board on the textual interface, starting from a given row.
+     * @param fromRow row from which to start printing
+     * @param nRows number of rows to print
+     */
     public void printBoard(int fromRow, int nRows) {
         for (int i = fromRow; i < fromRow + nRows; i++) {
             for (int j = 0; j < N; j++) {
@@ -70,7 +115,10 @@ public class Board {
         }
         System.out.print("\n");
     }
-
+    
+    /**
+     * Prints the whole Board.
+     */
     public void printBoard() {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
@@ -80,7 +128,13 @@ public class Board {
         }
         System.out.print("\n");
     }
-
+    
+    /**
+     * Optimised modulo operation for this Game of Life.
+     * @param i the object of the modulo
+     * @param m the base of the modulo
+     * @return i%m
+     */
     private int modulo(int i, int m) {
         int result;
         if (i == -1)
