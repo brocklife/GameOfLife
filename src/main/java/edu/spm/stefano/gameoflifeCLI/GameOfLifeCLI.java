@@ -116,7 +116,7 @@ public class GameOfLifeCLI {
             Boolean.toString(gliderConfig), 
             Integer.toString(NTHREADS)
         };
-        
+        System.out.println("rows, columns, cycles, graphics, glider, NTHREADS");
         System.out.println(Arrays.toString(args2));
         
         switch (implementation) {
@@ -136,6 +136,8 @@ public class GameOfLifeCLI {
                 System.err.println("Wrong implementation code: seq, mt, sk, mu2 are allowed only.");
                 break;
         }
+        if (!graphicBoard && !implementation.equals("mt"))
+            System.exit(0);
 
     }
 
