@@ -85,7 +85,8 @@ public class GameOfLifeMuskel2 {
             System.exit(1);
         }
 
-        Integer step = m / (NTHREADS);
+        int step = m / (NTHREADS);
+        int extra = m % NTHREADS;
         Board board = new Board(m, n);
 
         if (glider) {
@@ -109,13 +110,12 @@ public class GameOfLifeMuskel2 {
         MuskelContext context = MuskelContext.builder().local().defaultPoolSize(NTHREADS).build();
 
         Couple[] bounds = new Couple[NTHREADS];
-
+        
+        int start = 0; int chunk = 0;
         for (int j = 0; j < NTHREADS; j++) {
-            if (j < NTHREADS - 1) {
-                bounds[j] = new Couple(j * step, step);
-            } else {
-                bounds[j] = new Couple(j * step, m - j * step);
-            }
+            start = start + chunk;
+            chunk = step + (extra-- > 0 ? 1:0);            
+            bounds[j] = new Couple(start, chunk);
         }
         
         final long startTime = System.currentTimeMillis();
@@ -130,9 +130,10 @@ public class GameOfLifeMuskel2 {
                     .toBlocking()
                     .first();
             board.swapBoards();
-        }
+        } 
 
         final long endTime = System.currentTimeMillis();
+        context.close();
         System.out.println("Muskel2 - Executed in " + (endTime - startTime) + " ms!");
     }
 }

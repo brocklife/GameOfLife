@@ -96,8 +96,7 @@ public class GameOfLifeSkandium {
                 new MergeResults(board));
 
         Skeleton<Board, Board> forLoop = new For(gof, steps);
-
-        board.initializeBoard();
+        
         Stream<Board, Board> stream = skandium.newStream(forLoop);
         final long startTime = System.currentTimeMillis();
         Future<Board> future = stream.input(board);
