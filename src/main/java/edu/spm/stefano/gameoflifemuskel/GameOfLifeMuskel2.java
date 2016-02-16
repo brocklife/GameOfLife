@@ -86,7 +86,7 @@ public class GameOfLifeMuskel2 {
             try {
                 NTHREADS = Integer.parseInt(args[6]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[4] + " must be an integer.");
+                System.err.println("Argument" + args[6] + " must be an integer.");
                 System.exit(1);
             }
             try {
@@ -98,7 +98,7 @@ public class GameOfLifeMuskel2 {
             try {
                 seed = Integer.parseInt(args[8]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[4] + " must be an integer.");
+                System.err.println("Argument" + args[8] + " must be an integer.");
                 System.exit(1);
             }
         } else {

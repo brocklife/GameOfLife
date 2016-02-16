@@ -72,7 +72,7 @@ public class GameOfLifeMultiThreaded {
             try {
                 NTHREADS = Integer.parseInt(args[6]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[4] + " must be an integer.");
+                System.err.println("Argument" + args[6] + " must be an integer.");
                 System.exit(1);
             }
             try {
@@ -84,7 +84,7 @@ public class GameOfLifeMultiThreaded {
             try {
                 seed = Integer.parseInt(args[8]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[4] + " must be an integer.");
+                System.err.println("Argument" + args[8] + " must be an integer.");
                 System.exit(1);
             }
         } else {
@@ -96,7 +96,6 @@ public class GameOfLifeMultiThreaded {
         int extra = m % NTHREADS;
 
         final Board board = new Board(m, n);
-
         if (glider) {
             board.initializeGlider();
         } else {
@@ -118,11 +117,9 @@ public class GameOfLifeMultiThreaded {
             frame.setVisible(true);
         }
 
-        final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards);
-        
+        final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards); 
         
         int start = 0;
-        int stop = 0;
         int chunk = 0;
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
  

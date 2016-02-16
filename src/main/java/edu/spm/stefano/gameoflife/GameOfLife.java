@@ -62,7 +62,7 @@ public class GameOfLife {
             try {
                 Integer.parseInt(args[6]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[4] + " must be an integer.");
+                System.err.println("Argument" + args[6] + " must be an integer.");
                 System.exit(1);
             }
             try {
@@ -74,7 +74,7 @@ public class GameOfLife {
             try {
                 seed = Integer.parseInt(args[8]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument" + args[4] + " must be an integer.");
+                System.err.println("Argument" + args[8] + " must be an integer.");
                 System.exit(1);
             }
         } else {
@@ -93,11 +93,9 @@ public class GameOfLife {
                 board.initializeBoard();
         }
         
-        JFrame frame = null;
-        Graphics g = null;
         if (graphics) {
-            frame = new JFrame("Game of Life - Sequential");
-            g = frame.getGraphics();
+            JFrame frame = new JFrame("Game of Life - Sequential");
+            Graphics g = frame.getGraphics();
             frame.pack();
             Insets insets = frame.getInsets();
             frame.getContentPane().add(new GraphicBoard(board), BorderLayout.CENTER);
