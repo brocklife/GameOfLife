@@ -158,6 +158,6 @@ public class GameOfLifeMuskel2 {
 
         final long endTime = System.currentTimeMillis();
         context.close();
-        System.out.println("Muskel2 - Executed in " + (endTime - startTime) + " ms!");
+        System.out.println(endTime - startTime);
     }
 }

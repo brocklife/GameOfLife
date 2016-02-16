@@ -125,6 +125,6 @@ public class GameOfLifeSkandium {
         Future<Board> future = stream.input(board);
         Board res = future.get();
         final long endTime = System.currentTimeMillis();
-        System.out.println("Skandium - Executed in " + (endTime - startTime) + " ms!");
+        System.out.println(endTime - startTime);
     }
 }
