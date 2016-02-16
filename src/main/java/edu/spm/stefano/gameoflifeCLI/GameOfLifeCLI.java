@@ -35,6 +35,9 @@ public class GameOfLifeCLI {
         int m = 1000, n = 1000, t = 1000;
         boolean graphicBoard = false;
         boolean gliderConfig = false;
+        boolean randomSeedBool = false;
+        int randomSeed = 0;
+        boolean optimisedVersion = false;
         String implementation = "seq";
         int NTHREADS = Runtime.getRuntime().availableProcessors();
 
@@ -52,6 +55,11 @@ public class GameOfLifeCLI {
         Option framework = new Option("f", true, "select the GoL version to be run");
         //NTHREADS
         Option threads = new Option("N", true, "number of threads for parallel implementations");
+        //optimised
+        Option optimised = new Option ("o", false, "run the optimised version for the countAliveNeighbours");
+        //pseudo-random
+        Option seed = new Option ("s", true, "initialise the matrix by means of a seed");
+        
         options
                 .addOption(rows)
                 .addOption(columns)
@@ -59,7 +67,9 @@ public class GameOfLifeCLI {
                 .addOption(graphics)
                 .addOption(glider)
                 .addOption(framework)
-                .addOption(threads);
+                .addOption(threads)
+                .addOption(optimised)
+                .addOption(seed);
 
         CommandLineParser parser = new DefaultParser();
 
@@ -82,6 +92,13 @@ public class GameOfLifeCLI {
             }
             if(cmd.hasOption("N")){
                 NTHREADS = Integer.parseInt(cmd.getOptionValue("N"));
+            }
+            if(cmd.hasOption("s")){
+                randomSeed = Integer.parseInt(cmd.getOptionValue("s"));
+                randomSeedBool = true;
+            }     
+            if(cmd.hasOption("o")){
+                optimisedVersion = true;
             }
             if (cmd.hasOption("f")) {
                 String s = cmd.getOptionValue("f");
@@ -112,11 +129,14 @@ public class GameOfLifeCLI {
             Integer.toString(m), 
             Integer.toString(n), 
             Integer.toString(t), 
+            Boolean.toString(optimisedVersion),
             Boolean.toString(graphicBoard), 
             Boolean.toString(gliderConfig), 
-            Integer.toString(NTHREADS)
+            Integer.toString(NTHREADS),
+            Boolean.toString(randomSeedBool),
+            Integer.toString(randomSeed)
         };
-        System.out.println("rows, columns, cycles, graphics, glider, NTHREADS");
+        System.out.println("rows, columns, cycles, optimised, graphics, glider, NTHREADS, seedBool, seed");
         System.out.println(Arrays.toString(args2));
         
         switch (implementation) {
