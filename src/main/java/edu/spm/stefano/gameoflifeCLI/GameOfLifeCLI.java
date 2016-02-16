@@ -136,8 +136,8 @@ public class GameOfLifeCLI {
             Boolean.toString(randomSeedBool),
             Integer.toString(randomSeed)
         };
-        System.out.println("rows, columns, cycles, optimised, graphics, glider, NTHREADS, seedBool, seed");
-        System.out.println(Arrays.toString(args2));
+        //System.out.println("rows, columns, cycles, optimised, graphics, glider, NTHREADS, seedBool, seed");
+        //System.out.println(Arrays.toString(args2));
         
         switch (implementation) {
             case "seq":
