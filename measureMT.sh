@@ -1,7 +1,7 @@
 #!/bin/bash
 
 let TOT=0
-let TIMES=20
+let TIMES=30
 PROCESSORS='20'
 let seed=481183
 
@@ -15,7 +15,7 @@ for (( k = 1; k <= PROCESSORS; k=k+1 )); do
         echo $OUT >> mt_${k}.txt
 		let TOT=$TOT+$OUT 
 	done
-	let TOT=$TOT/$k
+	let TOT=$TOT/$TIMES
 	echo "Multithreaded Java ($k threads)" >> results.txt
     echo $TOT >> results.txt
 done

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 let TOT=0
-let TIMES=20
+let TIMES=30
 let seed=481183
 PROCESSORS='20'
 
