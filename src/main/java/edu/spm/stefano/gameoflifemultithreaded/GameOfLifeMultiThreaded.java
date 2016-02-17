@@ -9,6 +9,7 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 /**
@@ -118,17 +119,18 @@ public class GameOfLifeMultiThreaded {
         }
 
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards); 
-        
         int start = 0;
         int chunk = 0;
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);
- 
+        final long startTime = System.currentTimeMillis();
         for (int j = 0; j < NTHREADS; j++) {
             start = start + chunk;
             chunk = step + (extra-- > 0 ? 1:0);
             threadPool.execute(new Consumer(board, start, chunk, steps, barrier, NTHREADS));
         }
         threadPool.shutdown();
-
+        threadPool.awaitTermination(1, TimeUnit.MINUTES);
+        final long endTime = System.currentTimeMillis();
+        System.out.println(endTime-startTime); 
     }
 }
