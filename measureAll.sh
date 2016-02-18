@@ -16,11 +16,11 @@ echo "$IMPLEM" >> results_${DIM}.txt
 for (( k = 1; k <= PROCESSORS; k=k+1 )); do 
 	let TOT=0
 	for (( i = 0; i < TIMES; i=i+1 )); do
-      echo $i
-		OUT=`java -jar ./target/GameOfLife-1.0-jar-with-dependencies.jar -m $DIM -n $DIM -f $IMPLEM -N $k -s $SEED`
-      #echo $OUT >> ${IMPLEM}_${k}_${DIM}.txt
-		let TOT=$TOT+$OUT 
+        echo $i
+        OUT=`java -jar ./target/GameOfLife-1.0-jar-with-dependencies.jar -m $DIM -n $DIM -f $IMPLEM -N $k -s $SEED`
+        #echo $OUT >> ${IMPLEM}_${k}_${DIM}.txt
+        let TOT=$TOT+$OUT 
 	done
 	let TOT=$TOT/$TIMES
-   echo $TOT >> results_${DIM}.txt
+    echo $TOT >> results_${DIM}.txt
 done

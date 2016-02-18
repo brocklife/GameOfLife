@@ -188,88 +188,38 @@ public class Board {
      */
     private int optimisedCountAliveNeighbours(int i, int j) {
         int result = 0;
-        if (i > 0 && i < M - 1 && j > 0 && j < N - 1) {
-            result = boardFrom[i - 1][j - 1]
-                    + boardFrom[i - 1][j]
-                    + boardFrom[i - 1][j + 1]
-                    + boardFrom[i][j - 1]
-                    + boardFrom[i][j + 1]
-                    + boardFrom[i + 1][j - 1]
-                    + boardFrom[i + 1][j]
-                    + boardFrom[i + 1][j + 1];
-        } else if (i == 0 && j == 0) { //(0,0)
-            result = boardFrom[M - 1][N - 1]
-                    + boardFrom[M - 1][0]
-                    + boardFrom[M - 1][1]
-                    + boardFrom[0][N - 1]
-                    + boardFrom[0][1]
-                    + boardFrom[1][N - 1]
-                    + boardFrom[1][0]
-                    + boardFrom[1][1];
-        } else if (i == 0 && j == N - 1) { //(0,N-1)
-            result = boardFrom[M - 1][N - 2]
-                    + boardFrom[M - 1][N - 1]
-                    + boardFrom[M - 1][0]
-                    + boardFrom[0][N - 2]
-                    + boardFrom[0][0]
-                    + boardFrom[1][N - 2]
-                    + boardFrom[1][N - 1]
-                    + boardFrom[1][0];
-        } else if (i == M - 1 && j == N - 1) { //(M-1,N-1)
-            result = boardFrom[M - 2][N - 2]
-                    + boardFrom[M - 2][N - 1]
-                    + boardFrom[M - 2][0]
-                    + boardFrom[M - 1][N - 2]
-                    + boardFrom[M - 1][0]
-                    + boardFrom[0][N - 2]
-                    + boardFrom[0][N - 1]
-                    + boardFrom[0][0];
-        } else if (i == M - 1 && j == 0) { //(M-1,0)
-            result = boardFrom[M - 2][N - 1]
-                    + boardFrom[M - 2][0]
-                    + boardFrom[M - 2][1]
-                    + boardFrom[M - 1][N - 1]
-                    + boardFrom[M - 1][1]
-                    + boardFrom[0][N - 1]
-                    + boardFrom[0][0]
-                    + boardFrom[0][1];
-        } else if (j == 0) {
-            result = boardFrom[i - 1][N - 1]
-                    + boardFrom[i - 1][j]
-                    + boardFrom[i - 1][j + 1]
-                    + boardFrom[i][N - 1]
-                    + boardFrom[i][j + 1]
-                    + boardFrom[i + 1][N - 1]
-                    + boardFrom[i + 1][j]
-                    + boardFrom[i + 1][j + 1];
-        } else if (j == N - 1) {
-            result = boardFrom[i - 1][j - 1]
-                    + boardFrom[i - 1][j]
-                    + boardFrom[i - 1][0]
-                    + boardFrom[i][j - 1]
-                    + boardFrom[i][0]
-                    + boardFrom[i + 1][j - 1]
-                    + boardFrom[i + 1][j]
-                    + boardFrom[i + 1][0];
-        } else if (i == 0) {
-            result = boardFrom[M - 1][j - 1]
-                    + boardFrom[M - 1][j]
-                    + boardFrom[M - 1][j + 1]
-                    + boardFrom[i][j - 1]
-                    + boardFrom[i][j + 1]
-                    + boardFrom[i + 1][j - 1]
-                    + boardFrom[i + 1][j]
-                    + boardFrom[i + 1][j + 1];
-        } else if (i == M - 1) {
-            result = boardFrom[i - 1][j - 1]
-                    + boardFrom[i - 1][j]
-                    + boardFrom[i - 1][j + 1]
-                    + boardFrom[i][j - 1]
-                    + boardFrom[i][j + 1]
-                    + boardFrom[0][j - 1]
-                    + boardFrom[0][j]
-                    + boardFrom[0][j + 1];
+        int prevRow, succRow, prevColumn, succColumn;
+        
+        if (i == 0){
+            prevRow = M - 1;
+        } else {
+            prevRow = i - 1;
         }
+        if (j == 0){
+            prevColumn = N - 1;
+        } else {
+            prevColumn = j - 1;
+        }
+        if (j == N - 1){
+            succColumn = 0;
+        } else {
+            succColumn = j + 1;
+        }
+        if (i == M - 1){
+            succRow = 0;
+        } else {
+            succRow = i + 1;
+        }
+
+        result = boardFrom[prevRow][prevColumn]
+                + boardFrom[prevRow][j]
+                + boardFrom[prevRow][succColumn]
+                + boardFrom[i][prevColumn]
+                + boardFrom[i][succColumn]
+                + boardFrom[succRow][prevColumn]
+                + boardFrom[succRow][j]
+                + boardFrom[succRow][succColumn];
+       
         return result;
     }
 
