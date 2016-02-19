@@ -2,6 +2,7 @@ package edu.spm.stefano.gameoflifemultithreaded;
 
 import edu.spm.stefano.gameoflife.GraphicBoard;
 import edu.spm.stefano.gameoflife.Board;
+import edu.spm.stefano.gameoflife.Interval;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Insets;
