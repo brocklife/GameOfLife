@@ -281,4 +281,20 @@ public class Board {
             }
         }
     }
+    
+    public Interval[] splitBoard(int NTHREADS){
+        int step = M / (NTHREADS);
+        int extra = M % NTHREADS;
+        int start = 0;
+        int chunk = 0;
+        Interval[] bounds = new Interval[NTHREADS];
+
+        for (int j = 0; j < NTHREADS; j++) {
+            start = start + chunk;
+            chunk = step + (extra-- > 0 ? 1:0);            
+            bounds[j] = new Interval(start, chunk);
+        }
+        
+        return bounds;
+    }
 }

@@ -94,10 +94,10 @@ public class GameOfLifeMultiThreaded {
             System.exit(1);
         }
 
-        int step = m / (NTHREADS);
-        int extra = m % NTHREADS;
 
         final Board board = new Board(m, n);
+        Interval[] bounds = board.splitBoard(NTHREADS);
+        
         if (glider) {
             board.initializeGlider();
         } else {
@@ -120,15 +120,7 @@ public class GameOfLifeMultiThreaded {
         }
 
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards); 
-        int start = 0;
-        int chunk = 0;
-        Interval[] bounds = new Interval[NTHREADS];
 
-        for (int j = 0; j < NTHREADS; j++) {
-            start = start + chunk;
-            chunk = step + (extra-- > 0 ? 1:0);            
-            bounds[j] = new Interval(start, chunk);
-        }
         
         ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);        
         final long startTime = System.currentTimeMillis();

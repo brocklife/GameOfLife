@@ -135,14 +135,7 @@ public class GameOfLifeMuskel2 {
         
         MuskelContext context = MuskelContext.builder().local().defaultPoolSize(NTHREADS).build();
 
-        Interval[] bounds = new Interval[NTHREADS];
-        
-        int start = 0; int chunk = 0;
-        for (int j = 0; j < NTHREADS; j++) {
-            start = start + chunk;
-            chunk = step + (extra-- > 0 ? 1:0);            
-            bounds[j] = new Interval(start, chunk);
-        }
+        Interval[] bounds = board.splitBoard(NTHREADS);
         
         final long startTime = System.currentTimeMillis();
 
