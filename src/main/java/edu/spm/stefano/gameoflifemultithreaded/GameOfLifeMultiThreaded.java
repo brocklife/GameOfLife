@@ -132,5 +132,6 @@ public class GameOfLifeMultiThreaded {
         threadPool.awaitTermination(1, TimeUnit.MINUTES);
         final long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime); 
+        System.exit(0);
     }
 }

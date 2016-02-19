@@ -246,6 +246,7 @@ public class Board {
             makeStep(0, nRows);
             swapBoards();
         }
+
     }
 
     /**
@@ -259,16 +260,23 @@ public class Board {
         for (int i = startRow; i < startRow + nRows; i++) {
             for (int j = 0; j < N; j++) {
                 int aliveNeighbours = optimisedCountAliveNeighbours(i, j);
-                if (boardFrom[i][j] == ALIVE) {
-                    if (aliveNeighbours < 2 || aliveNeighbours > 3) {
-                        boardTo[i][j] = DEAD;
-                    } else {
-                        boardTo[i][j] = ALIVE;
+                
+                if (boardFrom[i][j] == ALIVE){
+                    switch(aliveNeighbours){
+                        case 2: boardTo[i][j] = ALIVE;
+                        break;
+                        case 3: boardTo[i][j] = ALIVE;
+                        break;
+                        default: boardTo[i][j] = DEAD;
+                        break;
                     }
-                } else if (aliveNeighbours == 3) {
-                    boardTo[i][j] = ALIVE;
                 } else {
-                    boardTo[i][j] = DEAD;
+                    switch (aliveNeighbours){
+                        case 3: boardTo[i][j] = ALIVE;
+                        break;
+                        default: boardTo[i][j] = DEAD;
+                        break;
+                    }
                 }
             }
         }

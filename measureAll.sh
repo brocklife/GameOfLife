@@ -4,9 +4,9 @@ IMPLEM=$1
 SEED=$2
 DIM=$3
 PROCESSORS=$4
+TIMES=$5 #30 allows to apply the Central Limit Theorem
 
 let TOT=0
-let TIMES=30 #30 allows to apply the Central Limit Theorem
 
 echo "*** Launching the $IMPLEM program $TIMES times and averaging the execution times.\
 Matrix dimension: $DIM. Seed: $SEED. Max Threads: $PROCESSORS."

@@ -1,31 +1,42 @@
 #!/bin/bash
 
-./measureAll.sh "seq" 481183 500 1
-./measureAll.sh "mt" 481183 500 20
-./measureAll.sh "sk" 481183 500 20
-./measureAll.sh "mu2" 481183 500 20
+SEED=481183
+PROCESSORS=25
+TIMES=$5 #30 allows to apply the Central Limit Theorem
 
-./measureAll.sh "seq" 481183 1000 1
-./measureAll.sh "mt" 481183 1000 20
-./measureAll.sh "sk" 481183 1000 20
-./measureAll.sh "mu2" 481183 1000 20
+DIM=500
 
-./measureAll.sh "seq" 481183 2000 1
-./measureAll.sh "mt" 481183 2000 20
-./measureAll.sh "sk" 481183 2000 20
-./measureAll.sh "mu2" 481183 2000 20
+./measureAll.sh "seq" $SEED $DIM 1 $TIMES
+./measureAll.sh "mt" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "sk" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "mu2" $SEED $DIM $PROCESSORS $TIMES
 
-./measureAll.sh "seq" 481183 4000 1
-./measureAll.sh "mt" 481183 4000 20
-./measureAll.sh "sk" 481183 4000 20
-./measureAll.sh "mu2" 481183 4000 20
+DIM=1000
 
-./measureAll.sh "seq" 481183 8000 1
-./measureAll.sh "mt" 481183 8000 20
-./measureAll.sh "sk" 481183 8000 20
-./measureAll.sh "mu2" 481183 8000 20
+./measureAll.sh "seq" $SEED $DIM 1 $TIMES
+./measureAll.sh "mt" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "sk" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "mu2" $SEED $DIM $PROCESSORS $TIMES
 
-./measureAll.sh "seq" 481183 10000 1
-./measureAll.sh "mt" 481183 10000 20
-./measureAll.sh "sk" 481183 10000 20
-./measureAll.sh "mu2" 481183 10000 20
+DIM=2000
+
+./measureAll.sh "seq" $SEED $DIM 1 $TIMES
+./measureAll.sh "mt" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "sk" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "mu2" $SEED $DIM $PROCESSORS $TIMES
+
+DIM=5000
+
+./measureAll.sh "seq" $SEED $DIM 1 $TIMES
+./measureAll.sh "mt" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "sk" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "mu2" $SEED $DIM $PROCESSORS $TIMES
+
+DIM=10000
+
+./measureAll.sh "seq" $SEED $DIM 1 $TIMES
+./measureAll.sh "mt" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "sk" $SEED $DIM $PROCESSORS $TIMES
+./measureAll.sh "mu2" $SEED $DIM $PROCESSORS $TIMES
+
+

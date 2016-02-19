@@ -106,8 +106,9 @@ public class GameOfLife {
         }
 
         final long startTime = System.currentTimeMillis();
-        for (int k = 0; k < steps; k++) {
-            board.makeSteps(1, 0, m);
+        for (int i = 0; i < steps; i++){
+            board.makeStep(0, m);
+            board.swapBoards();
         }
         final long endTime = System.currentTimeMillis();
 
