@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.JFrame;
+import static it.reactive.muskel.MuskelExecutor.local;
 
 /**
  *
@@ -133,13 +134,13 @@ public class GameOfLifeMuskel2 {
         
         MuskelContext context = MuskelContext.builder().local().defaultPoolSize(NTHREADS).build();
 
-        Couple[] bounds = new Couple[NTHREADS];
+        Interval[] bounds = new Interval[NTHREADS];
         
         int start = 0; int chunk = 0;
         for (int j = 0; j < NTHREADS; j++) {
             start = start + chunk;
             chunk = step + (extra-- > 0 ? 1:0);            
-            bounds[j] = new Couple(start, chunk);
+            bounds[j] = new Interval(start, chunk);
         }
         
         final long startTime = System.currentTimeMillis();
@@ -147,7 +148,7 @@ public class GameOfLifeMuskel2 {
         for (int k = 0; k < steps; k++) {
             MuskelProcessor.from(bounds)
                     .withContext(context)
-                    .map((Couple b) -> {
+                    .map((Interval b) -> {
                         board.makeStep(b.a, b.b);
                         return b;
                     }, local())

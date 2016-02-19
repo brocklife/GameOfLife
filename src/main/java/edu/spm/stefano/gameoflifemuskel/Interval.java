@@ -9,11 +9,11 @@ package edu.spm.stefano.gameoflifemuskel;
  *
  * @author stefano
  */
-public class Couple {
+public class Interval {
     int a;
     int b;
     
-    public Couple(int a, int b){
+    public Interval(int a, int b){
         this.a = a;
         this.b = b;
     }

@@ -121,10 +121,12 @@ public class GameOfLifeSkandium {
         Skeleton<Board, Board> forLoop = new For(gof, steps);
         
         Stream<Board, Board> stream = skandium.newStream(forLoop);
-        final long startTime = System.currentTimeMillis();
         Future<Board> future = stream.input(board);
+        
+        final long startTime = System.currentTimeMillis();
         Board res = future.get();
         final long endTime = System.currentTimeMillis();
+        
         System.out.println(endTime - startTime);
     }
 }
