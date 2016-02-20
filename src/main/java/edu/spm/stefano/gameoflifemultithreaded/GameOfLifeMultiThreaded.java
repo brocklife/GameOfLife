@@ -122,13 +122,15 @@ public class GameOfLifeMultiThreaded {
         final CyclicBarrier barrier = new CyclicBarrier(NTHREADS, board::swapBoards); 
 
         
-        ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);        
+        ExecutorService threadPool = Executors.newFixedThreadPool(NTHREADS);   
+        
         final long startTime = System.currentTimeMillis();
         for (int j = 0; j < NTHREADS; j++){
             threadPool.execute(new Consumer(board, bounds[j].a, bounds[j].b, steps, barrier, NTHREADS));
         }
         threadPool.shutdown();
         threadPool.awaitTermination(1, TimeUnit.MINUTES);
+        
         final long endTime = System.currentTimeMillis();
         
         System.out.println(endTime-startTime); 
