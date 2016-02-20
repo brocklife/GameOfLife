@@ -8,7 +8,6 @@ package edu.spm.stefano.gameoflifemuskel;
 import edu.spm.stefano.gameoflife.Board;
 import edu.spm.stefano.gameoflife.GraphicBoard;
 import edu.spm.stefano.gameoflife.Interval;
-import static it.reactive.muskel.MuskelExecutor.local;
 import it.reactive.muskel.MuskelProcessor;
 import it.reactive.muskel.context.MuskelContext;
 import java.awt.BorderLayout;
@@ -108,8 +107,6 @@ public class GameOfLifeMuskel2 {
             System.exit(1);
         }
 
-        int step = m / (NTHREADS);
-        int extra = m % NTHREADS;
         Board board = new Board(m, n);
 
         if (glider) {
