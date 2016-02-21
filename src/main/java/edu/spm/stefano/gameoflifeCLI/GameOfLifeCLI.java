@@ -73,8 +73,8 @@ public class GameOfLifeCLI {
                 .addOption(threads)
                 .addOption(seed);
        
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("GameOfLife", options, true);
+        //HelpFormatter formatter = new HelpFormatter();
+        //formatter.printHelp("GameOfLife", options, true);
 
         CommandLineParser parser = new DefaultParser();
 
@@ -141,8 +141,6 @@ public class GameOfLifeCLI {
             Boolean.toString(randomSeedBool),
             Integer.toString(randomSeed)
         };
-        //System.out.println("rows, columns, cycles, optimised, graphics, glider, NTHREADS, seedBool, seed");
-        //System.out.println(Arrays.toString(args2));
         
         switch (implementation) {
             case "seq":
