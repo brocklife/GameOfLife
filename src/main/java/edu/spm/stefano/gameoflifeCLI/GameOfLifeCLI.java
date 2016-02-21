@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -46,17 +47,19 @@ public class GameOfLifeCLI {
         //number of columns
         Option columns = new Option("n", true, "number of columns for the GoL board");
         //times
-        Option times = new Option("t", true, "number of cycles for GoL");
+        Option times = new Option("t", true, "number of generations for GoL");
         //graphics
         Option graphics = new Option("g", false, "activate the graphics visualisation");
         //glider
         Option glider = new Option("glider", false, "use the \"glider\" initialisation");
         //framework
-        Option framework = new Option("f", true, "select the GoL version to be run");
+        Option framework = new Option("f", true, "select the GoL version to be run:\n "
+                + "seq (sequential), \n "
+                + "mt (Java threads),\n "
+                + "mu2 (Muskel2), \n "
+                + "sk (Skandium)");
         //NTHREADS
         Option threads = new Option("N", true, "number of threads for parallel implementations");
-        //optimised
-        Option optimised = new Option ("o", false, "run the optimised version for the countAliveNeighbours");
         //pseudo-random
         Option seed = new Option ("s", true, "initialise the matrix by means of a seed");
         
@@ -68,8 +71,10 @@ public class GameOfLifeCLI {
                 .addOption(glider)
                 .addOption(framework)
                 .addOption(threads)
-                .addOption(optimised)
                 .addOption(seed);
+       
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("GameOfLife", options, true);
 
         CommandLineParser parser = new DefaultParser();
 

@@ -113,18 +113,17 @@ public class GameOfLifeSkandium {
         }
 
         Skandium skandium = new Skandium(NTHREADS);
-        Skeleton<Board, Board> gof = new Map<>(
-                new SplitBoard(NTHREADS),
-                new ComputeSteps(board),
-                new MergeResults(board));
-
-        Skeleton<Board, Board> forLoop = new For(gof, steps);
-        
+        Skeleton<Board, Board> forLoop = 
+                new For(
+                    new Map<>(
+                    new SplitBoard(NTHREADS),
+                    new ComputeSteps(board),
+                    new MergeResults(board)), 
+                steps); 
         Stream<Board, Board> stream = skandium.newStream(forLoop);
         Future<Board> future = stream.input(board);
-        
         final long startTime = System.currentTimeMillis();
-        Board res = future.get();
+        future.get();
         final long endTime = System.currentTimeMillis();
         
         System.out.println(endTime - startTime);

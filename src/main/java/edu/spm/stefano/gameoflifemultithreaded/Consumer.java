@@ -18,22 +18,19 @@ import java.util.logging.Logger;
 public class Consumer implements Runnable {
 
     Board board;
-    int start, n, steps, NTHREADS;
+    int start, n, steps;
     private final CyclicBarrier barrier;
 
-    public Consumer(Board b, int startRow, int nRows, int iterations, CyclicBarrier barrier, int threads) {
+    public Consumer(Board b, int startRow, int nRows, int iterations, CyclicBarrier barrier) {
         board = b;
         start = startRow;
         n = nRows;
         steps = iterations;
         this.barrier = barrier;
-        NTHREADS = threads;
     }
 
     @Override
     public void run() {
-        
-        final long startTime = System.currentTimeMillis();
         for (int i = 0; i < steps; i++) {
             board.makeStep(start, n);
             try {
@@ -41,9 +38,6 @@ public class Consumer implements Runnable {
             } catch (InterruptedException | BrokenBarrierException ex) {
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
             }
- 
         }
-        final long endTime = System.currentTimeMillis();
-        //System.out.println(endTime-startTime);
     }
 }

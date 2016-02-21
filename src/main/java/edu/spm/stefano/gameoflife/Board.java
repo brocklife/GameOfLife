@@ -139,77 +139,25 @@ public class Board {
     }
 
     /**
-     * Optimised modulo operation for this Game of Life.
-     *
-     * @param i the object of the modulo
-     * @param m the base of the modulo
-     * @return i%m
-     */
-    private int modulo(int i, int m) {
-        int result;
-        if (i == -1) {
-            result = m - 1;
-        } else if (i == m) {
-            result = 0;
-        } else {
-            result = i;
-        }
-        return result;
-    }
-
-    /**
-     * A non-optimised function that counts the alive neighbours of cell (i,j).
-     * It makes use of the a modulo function.
-     *
-     * @param i row identifier
-     * @param j column identifier
-     * @return the number of alive cells around (i,j)
-     */
-    private int countAliveNeighbours(int i, int j) {
-        int result
-                = boardFrom[modulo(i - 1, M)][modulo(j - 1, N)]
-                + boardFrom[modulo(i - 1, M)][modulo(j, N)]
-                + boardFrom[modulo(i - 1, M)][modulo(j + 1, N)]
-                + boardFrom[modulo(i, M)][modulo(j - 1, N)]
-                + boardFrom[modulo(i, M)][modulo(j + 1, N)]
-                + boardFrom[modulo(i + 1, M)][modulo(j - 1, N)]
-                + boardFrom[modulo(i + 1, M)][modulo(j, N)]
-                + boardFrom[modulo(i + 1, M)][modulo(j + 1, N)];
-        return result;
-    }
-
-    /**
-     * A optimised function that counts the alive neighbours of a cell without
+     * A function that counts the alive neighbours of a cell without
      * using any modulo operation.
      *
      * @param i row identifier
      * @param j column identifier
      * @return the number of alive cells around (i,j)
      */
-    private int optimisedCountAliveNeighbours(int i, int j) {
+    private int countAliveNeighbours(int i, int j) {
         int result = 0;
-        int prevRow, succRow, prevColumn, succColumn;
+        int prevRow = i - 1, succRow = i + 1, prevColumn = j - 1, succColumn = j + 1;
         
-        if (i == 0){
+        if (i == 0)
             prevRow = M - 1;
-        } else {
-            prevRow = i - 1;
-        }
-        if (j == 0){
+        if (j == 0)
             prevColumn = N - 1;
-        } else {
-            prevColumn = j - 1;
-        }
-        if (j == N - 1){
+        if (j == N - 1)
             succColumn = 0;
-        } else {
-            succColumn = j + 1;
-        }
-        if (i == M - 1){
+        if (i == M - 1)
             succRow = 0;
-        } else {
-            succRow = i + 1;
-        }
 
         result = boardFrom[prevRow][prevColumn]
                 + boardFrom[prevRow][j]
@@ -259,7 +207,7 @@ public class Board {
     public void makeStep(int startRow, int nRows) {
         for (int i = startRow; i < startRow + nRows; i++) {
             for (int j = 0; j < N; j++) {
-                int aliveNeighbours = optimisedCountAliveNeighbours(i, j);
+                int aliveNeighbours = countAliveNeighbours(i, j);
                 
                 if (boardFrom[i][j] == ALIVE){
                     switch(aliveNeighbours){
